@@ -24,6 +24,12 @@
                     <span>File manager</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ backpack_url('enterprise') }}">
+                    <i class="fa fa-files-o"></i> 
+                    <span>Imprese</span>
+                </a>
+            </li>
 
             <li class="treeview">
                 <a href="#">

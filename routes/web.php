@@ -14,3 +14,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@home')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
+{
+  // Backpack\CRUD: Define the resources for the entities you want to CRUD.
+    CRUD::resource('enterprise', 'Admin\EnterpriseCrudController');
+  
+  // [...] other routes
+});

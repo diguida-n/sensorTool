@@ -8,7 +8,7 @@
         html, body {
             background-color: #fff;
             color: #156b6f;
-            font-family: 'Barcode', sans-serif;
+            font-family: 'Libre Barcode 39 Extended Text', sans-serif;
             font-weight: 100;
             height: 100vh;
             margin: 0;

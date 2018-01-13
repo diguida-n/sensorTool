@@ -8,7 +8,7 @@
         html, body {
             background-color: #fff;
             color: #156b6f;
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Barcode', sans-serif;
             font-weight: 100;
             height: 100vh;
             margin: 0;
@@ -39,7 +39,7 @@
         }
 
         .title {
-            font-size: 120px;
+            font-size: 84px;
         }
 
         .links > a {
@@ -63,7 +63,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Succhiacazzi
+                SensorTool
             </div>
 
             <div class="links">

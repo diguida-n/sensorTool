@@ -20,7 +20,7 @@ class BrandCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Brand');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/brand');
-        $this->crud->setEntityNameStrings('brand', 'brands');
+        $this->crud->setEntityNameStrings('Brand', 'Brand');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,12 +31,21 @@ class BrandCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->addField([
+            'name' => 'name',
+            'label' => 'Nome',
+            'type' => 'text',
+        ], 'update/create/both');
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
+        $this->crud->addColumn([
+           'name' => 'name',
+           'label' => "Nome"
+        ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack

@@ -74,6 +74,36 @@ class SensorCatalogCrudController extends CrudController
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
+        $this->crud->addColumn([
+           'name' => 'name',
+           'label' => "Nome"
+        ]);
+        $this->crud->addColumn([
+           'name' => 'description',
+           'label' => "Descrizione"
+        ]);
+        $this->crud->addColumn([
+            'name' => 'min_detectable',
+            'label' => 'Minimo registrabile',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'max_detectable',
+            'label' => 'Massimo registrabile',
+        ]);
+        $this->crud->removeColumn('sensor_type_id'); // remove a column from the stack
+
+        $this->crud->addColumn([
+            'name' => 'brand_id',
+            'label' => 'Brand Sensore',
+            'type' => "model_function",
+            'function_name' => 'getBrandName',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'sensor_type_id',
+            'label' => 'Tipo Sensore',
+            'type' => "model_function",
+            'function_name' => 'getSensorTypeName',
+        ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack

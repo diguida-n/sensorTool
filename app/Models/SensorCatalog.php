@@ -62,4 +62,13 @@ class SensorCatalog extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function getBrandName($value='')
+    {
+        return $this->brand->name;
+    }
+    public function getSensorTypeName($value='')
+    {
+        return $this->sensorType->name;
+    }
 }

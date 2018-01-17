@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
     CRUD::resource('/sensortype', 'Admin\SensorTypeCrudController');
     CRUD::resource('/sensorcatalog', 'Admin\SensorCatalogCrudController');
     CRUD::resource('/sitetype', 'Admin\SiteTypeCrudController');
+    CRUD::resource('/site', 'Admin\SiteCrudController');
   
   // [...] other routes
 });

@@ -100,13 +100,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="#{{-- {{ url(config('backpack.base.route_prefix', 'admin') . '/sensorcatalog') }} --}}">
+                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/site') }}">
                             <i class="fa fa-building"></i>
                             <span>Sito</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/siteType') }}">
+                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/sitetype') }}">
                             <i class="fa fa-podcast"></i>
                             <span>Tipo di Sito</span>
                         </a>

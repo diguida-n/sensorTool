@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Backpack\CRUD\CrudTrait;
+use App\Scopes\EnterpriseTenantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteType extends Model
+class Site extends Model
 {
     use CrudTrait;
 
@@ -15,27 +16,40 @@ class SiteType extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'site_types';
+    //protected $table = 'sites';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ["name"];
+    protected $fillable = ['name','address','map','description','enterprise_id','site_type_id'];
     // protected $hidden = [];
     // protected $dates = [];
+
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
+    public function getEnterpriseName()
+    {
+        return $this->enterprise->businessName;
+    }
+    public function getSiteTypeName()
+    {
+        return $this->siteType->name;
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function sites()
+    public function siteType()
     {
-        return $this->hasMany(Site::class);
+        return $this->belongsTo(SiteType::class);
+    }
+    public function enterprise()
+    {
+        return $this->belongsTo(Enterprise::class);
     }
 
     /*
@@ -44,6 +58,12 @@ class SiteType extends Model
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new EnterpriseTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

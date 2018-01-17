@@ -47,6 +47,10 @@ class Enterprise extends Model
         return $this->hasMany(User::class(),'enterprise_id');
     }
 
+    public function sites()
+    {
+        return $this->hasMany(Site::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

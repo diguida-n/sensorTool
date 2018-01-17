@@ -29,7 +29,13 @@ class Enterprise extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
+    public function getAddress()
+    {
+        $address = json_decode($this->address);
+        if($address)
+            return $address->name.", "."".$address->administrative.", ".$address->city.", ".$address->country;
+        return "";
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

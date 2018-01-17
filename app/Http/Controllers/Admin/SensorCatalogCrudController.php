@@ -57,16 +57,22 @@ class SensorCatalogCrudController extends CrudController
             'attributes' => ["step" => 0.01,"max"=>999999.99,"min"=>-999999.99], // allow decimals
         ], 'update/create/both');
         $this->crud->addField([
-            'name' => 'sensor_type_id',
-            'label' => 'Id Tipo Sensore',
-            'type' => 'number',
-            'attributes' => ["min"=>1], // allow decimals
+            'label' => "Tipo Sensore",
+            'type' => 'select2',
+            'name' => 'sensor_type_id', // the db column for the foreign key
+            'entity' => 'sensorType', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\SensorType", // foreign key model
+            "attributes"=>['required'=>true]
         ], 'update/create/both');
         $this->crud->addField([
-            'name' => 'brand_id',
-            'label' => 'Id Brand Sensore',
-            'type' => 'number',
-            'attributes' => ["min"=>1], // allow decimals
+            'label' => "Brand sensore",
+            'type' => 'select2',
+            'name' => 'brand_id', // the db column for the foreign key
+            'entity' => 'brand', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Brand", // foreign key model
+            "attributes"=>['required'=>true]
         ], 'update/create/both');
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');

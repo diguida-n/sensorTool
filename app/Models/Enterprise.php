@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\User;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Enterprise extends Model
 {
@@ -34,6 +35,11 @@ class Enterprise extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function users()
+    {
+        return $this->hasMany(User::class(),'enterprise_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

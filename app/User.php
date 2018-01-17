@@ -2,10 +2,11 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Enterprise;
 use Backpack\Base\app\Notifications\ResetPasswordNotification as ResetPasswordNotification;
-use Backpack\CRUD\CrudTrait; // <------------------------------- this one
+use Backpack\CRUD\CrudTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 
 class User extends Authenticatable
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','enterprise_id'
     ];
 
     /**
@@ -42,5 +43,11 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+
+    public function enterprise()
+    {
+        return $this->belongsTo(Enterprise::class());
     }
 }

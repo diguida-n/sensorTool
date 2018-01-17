@@ -62,6 +62,8 @@ class EnterpriseCrudController extends CrudController
         $this->crud->addColumn([
             "name" => "address",
             "label" => "Indirizzo",
+            "type" => "model_function",
+            "function_name" => "getAddress"
         ]);
 
         $this->crud->addColumn([

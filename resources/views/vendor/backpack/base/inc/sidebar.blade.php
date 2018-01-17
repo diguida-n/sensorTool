@@ -61,6 +61,28 @@
 
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-building"></i>
+                    <span>Siti</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/site') }}">
+                            <i class="fa fa-building"></i>
+                            <span>Siti</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/sitetype') }}">
+                            <i class="fa fa-files-o"></i>
+                            <span>Tipi di Siti</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-podcast"></i>
                     <span>Sensori</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -75,40 +97,19 @@
                     <li>
                         <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/sensorcatalog') }}">
                             <i class="fa fa-files-o"></i>
-                            <span>Catalogo</span>
+                            <span>Cataloghi</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/sensortype') }}">
                             <i class="fa fa-thermometer-3"></i>
-                            <span>Tipi di Sensore</span>
+                            <span>Tipi di Sensori</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/brand') }}">
                             <i class="fa fa-feed"></i>
-                            <span>Brand sensore</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-building"></i>
-                    <span>Siti</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/site') }}">
-                            <i class="fa fa-building"></i>
-                            <span>Sito</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/sitetype') }}">
-                            <i class="fa fa-podcast"></i>
-                            <span>Tipo di Sito</span>
+                            <span>Brand sensori</span>
                         </a>
                     </li>
                 </ul>

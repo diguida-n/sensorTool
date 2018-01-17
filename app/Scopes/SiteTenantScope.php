@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class EnterpriseTenantScope implements Scope
+class SiteTenantScope implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -25,6 +25,6 @@ class EnterpriseTenantScope implements Scope
         }
         $enterprise_id = $user->enterprise_id;
         if($user->isCompanyManager())
-            $builder->where('id',$enterprise_id);
+            $builder->where('enterprise_id',$enterprise_id)->orWhere('enterprise_id',null);
     }
 }

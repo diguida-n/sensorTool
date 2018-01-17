@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\EnterpriseTenantScope;
 use App\User;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,12 @@ class Enterprise extends Model
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new EnterpriseTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

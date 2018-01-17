@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Backpack\CRUD\CrudTrait;
-use App\Scopes\EnterpriseTenantScope;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\SiteTenantScope;
 
 class Site extends Model
 {
@@ -62,7 +62,7 @@ class Site extends Model
     {
         parent::boot();
 
-        static::addGlobalScope(new EnterpriseTenantScope);
+        static::addGlobalScope(new SiteTenantScope);
     }
     /*
     |--------------------------------------------------------------------------

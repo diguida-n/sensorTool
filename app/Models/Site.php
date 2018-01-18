@@ -51,6 +51,10 @@ class Site extends Model
     {
         return $this->belongsTo(Enterprise::class);
     }
+    public function sensors()
+    {
+        return $this->hasMany(Sensor::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

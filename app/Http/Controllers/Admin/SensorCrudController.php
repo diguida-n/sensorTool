@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\SiteRequest as StoreRequest;
-use App\Http\Requests\SiteRequest as UpdateRequest;
+use App\Http\Requests\SensorRequest as StoreRequest;
+use App\Http\Requests\SensorRequest as UpdateRequest;
 
-class SiteCrudController extends CrudController
+class SensorCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class SiteCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Site');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/site');
-        $this->crud->setEntityNameStrings('Sito', 'Siti');
+        $this->crud->setModel('App\Models\Sensor');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/sensor');
+        $this->crud->setEntityNameStrings('Sensore', 'Sensori');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,50 +31,86 @@ class SiteCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
-        $this->crud->addField([
-            'label' => "Tipo Sito",
-            'type' => 'select2',
-            'name' => 'site_type_id', // the db column for the foreign key
-            'entity' => 'siteType', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\SiteType", // foreign key model
-            "attributes"=>['required'=>true]
-        ], 'update/create/both');
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
-        $this->crud->removeField('enterprise_id', 'both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
+        $this->crud->removeField('enterprise_id', 'both');
+        $this->crud->addField([
+            'name' => 'min_attended',
+            'label' => 'Minimo atteso',
+            'type' => 'number',
+            'attributes' => ["step" => 0.01,"max"=>999999.99,"min"=>-999999.99], // allow decimals
+        ], 'update/create/both');
+        $this->crud->addField([
+            'name' => 'max_attended',
+            'label' => 'Massimo atteso',
+            'type' => 'number',
+            'attributes' => ["step" => 0.01,"max"=>999999.99,"min"=>-999999.99], // allow decimals
+        ], 'update/create/both');
+        $this->crud->addField([
+            'name' => 'latitude',
+            'label' => 'Latitudine',
+            'type' => 'number',
+            'attributes' => ["step" => 0.0000001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
+        ], 'update/create/both');
+        $this->crud->addField([
+            'name' => 'longitude',
+            'label' => 'Longitudine',
+            'type' => 'number',
+            'attributes' => ["step" => 0.0000001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
+        ], 'update/create/both');
+        $this->crud->addField([
+            'label' => "Sito",
+            'type' => 'select2',
+            'name' => 'site_id', // the db column for the foreign key
+            'entity' => 'siteType', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Site", // foreign key model
+            "attributes"=>['required'=>true]
+        ], 'update/create/both');
+        $this->crud->addField([
+            'label' => "Catalogo Sensori",
+            'type' => 'select2',
+            'name' => 'sensor_catalog_id', // the db column for the foreign key
+            'entity' => 'sensorCatalog', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\SensorCatalog", // foreign key model
+            "attributes"=>['required'=>true]
+        ], 'update/create/both');
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
-           'name' => 'name',
-           'label' => "Nome"
+            'name' => 'min_attended',
+            'label' => 'Minimo atteso',
         ]);
         $this->crud->addColumn([
-           'name' => 'address',
-           'label' => "Indirizzo"
+            'name' => 'max_attended',
+            'label' => 'Massimo atteso',
         ]);
         $this->crud->addColumn([
-           'name' => 'description',
-           'label' => "Descrizione"
+            'name' => 'latitude',
+            'label' => 'Latitudine',
         ]);
-        // $this->crud->addColumn([
-        //     'name' => 'enterprise_id',
-        //     'label' => 'Impresa',
-        //     'type' => "model_function",
-        //     'function_name' => 'getEnterpriseName',
-        // ]);
         $this->crud->addColumn([
-            'name' => 'site_type_id',
-            'label' => 'Tipo Sito',
+            'name' => 'longitude',
+            'label' => 'Longitudine',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'site_id',
+            'label' => 'Sito',
             'type' => "model_function",
-            'function_name' => 'getSiteTypeName',
+            'function_name' => 'getSiteName',
         ]);
-
+        $this->crud->addColumn([
+            'name' => 'sensor_catalog_id',
+            'label' => 'Sensore',
+            'type' => "model_function",
+            'function_name' => 'getSensorName',
+        ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
+        $this->crud->removeColumn('enterprise_id'); // remove a column from the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
-        $this->crud->removeColumns(['map','enterprise_id']); // remove an array of columns from the stack
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);

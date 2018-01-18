@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use App\Scopes\SensorTenantScope;
+use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Sensor extends Model
 {
     use CrudTrait;
 
@@ -15,11 +16,12 @@ class Brand extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'brands';
+    //protected $table = 'sensors';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ["name"];
+    protected $fillable = ['min_attended','max_attended','longitude','latitude','site_id','sensor_catalog_id','enterprise_id'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -29,23 +31,39 @@ class Brand extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getSensorName()
+    {
+        return $this->sensorCatalog->name;
+    }
+    public function getSiteName()
+    {
+        return $this->site->name;
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    
-    public function sensorCatalogs()
+    public function site()
     {
-        return $this->hasMany(SensorCatalog::class);
+        return $this->belongsTo(Site::class);
     }
-
+    public function sensorCatalog()
+    {
+        return $this->belongsTo(SensorCatalog::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SensorTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

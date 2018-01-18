@@ -114,6 +114,12 @@
                                 <span>Brand sensori</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/message') }}">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Messaggi</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             @endif

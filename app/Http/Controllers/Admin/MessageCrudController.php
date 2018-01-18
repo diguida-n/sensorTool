@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\SiteRequest as StoreRequest;
-use App\Http\Requests\SiteRequest as UpdateRequest;
+use App\Http\Requests\MessageRequest as StoreRequest;
+use App\Http\Requests\MessageRequest as UpdateRequest;
 
-class SiteCrudController extends CrudController
+class MessageCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class SiteCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Site');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/site');
-        $this->crud->setEntityNameStrings('Sito', 'Siti');
+        $this->crud->setModel('App\Models\Message');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/message');
+        $this->crud->setEntityNameStrings('Messaggio', 'Tipi di messaggio');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,6 +31,8 @@ class SiteCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->removeField('enterprise_id', 'both');
+
 
         $this->crud->addField([
             'name' => 'description',
@@ -38,49 +40,70 @@ class SiteCrudController extends CrudController
             'type' => 'ckeditor',
         ], 'update/create/both');
         $this->crud->addField([
-            'label' => "Tipo Sito",
+            'name'        => 'malfunction', // the name of the db column
+            'label'       => 'Malfunzionamento', // the input label
+            'type'        => 'radio',
+            'options'     => [ // the key will be stored in the db, the value will be shown as label; 
+                                0 => "No",
+                                1 => "Si"
+                            ],
+            'inline'      => true, // show the radios all on the same line?
+        ], 'update/create/both');
+        $this->crud->addField([
+            'name'        => 'exception', // the name of the db column
+            'label'       => 'Eccezione', // the input label
+            'type'        => 'radio',
+            'options'     => [ // the key will be stored in the db, the value will be shown as label; 
+                                0 => "No",
+                                1 => "Si"
+                            ],
+            'inline'      => true, // show the radios all on the same line?
+        ], 'update/create/both');
+        $this->crud->addField([
+            'label' => "Catalogo Sensori",
             'type' => 'select2',
-            'name' => 'site_type_id', // the db column for the foreign key
-            'entity' => 'siteType', // the method that defines the relationship in your Model
+            'name' => 'sensor_catalog_id', // the db column for the foreign key
+            'entity' => 'sensorCatalog', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\SiteType", // foreign key model
+            'model' => "App\Models\SensorCatalog", // foreign key model
             "attributes"=>['required'=>true]
         ], 'update/create/both');
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
-        $this->crud->removeField('enterprise_id', 'both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
+
         // ------ CRUD COLUMNS
+        $this->crud->removeColumns(['malfunction','exception','description','enterprise_id']);
+
         $this->crud->addColumn([
-           'name' => 'name',
-           'label' => "Nome"
-        ]);
-        $this->crud->addColumn([
-           'name' => 'address',
-           'label' => "Indirizzo"
-        ]);
-        $this->crud->addColumn([
-           'name' => 'description',
-           'label' => "Descrizione"
-        ]);
-        // $this->crud->addColumn([
-        //     'name' => 'enterprise_id',
-        //     'label' => 'Impresa',
-        //     'type' => "model_function",
-        //     'function_name' => 'getEnterpriseName',
-        // ]);
-        $this->crud->addColumn([
-            'name' => 'site_type_id',
-            'label' => 'Tipo Sito',
+            'name' => 'sensor_catalog_id',
+            'label' => 'Sensore',
             'type' => "model_function",
-            'function_name' => 'getSiteTypeName',
+            'function_name' => 'getSensorName',
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'malfunction',
+            'label' => 'Malfunzionamento',
+            'type' => 'boolean',
+            'options' => [0 => 'No', 1 => 'Si']
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'exception',
+            'label' => 'Eccezione',
+            'type' => 'boolean',
+            'options' => [0 => 'No', 1 => 'Si']
+        ]);
+        $this->crud->addColumn([
+            'name' => 'description',
+            'label' => 'Descrizione',
         ]);
 
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
-        $this->crud->removeColumns(['map','enterprise_id']); // remove an array of columns from the stack
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);

@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Backpack\CRUD\CrudTrait;
+use App\Scopes\MessageTenantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class SensorCatalog extends Model
+class Message extends Model
 {
     use CrudTrait;
 
@@ -15,11 +16,13 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'sensor_catalogs';
+    //protected $table = 'messages';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ["name","description","min_detectable","max_detectable","sensor_type_id","brand_id"];
+    protected $fillable = [
+        'malfunction','exception','description','sensor_catalog_id','enterprise_id',
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -29,14 +32,9 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getBrandName($value='')
+    public function getSensorName()
     {
-        return $this->brand->name;
-    }
-    
-    public function getSensorTypeName($value='')
-    {
-        return $this->sensorType->name;
+        return $this->sensorCatalog->name;
     }
     /*
     |--------------------------------------------------------------------------
@@ -44,28 +42,23 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function sensorType()
+    public function sensorCatalog()
     {
-        return $this->belongsTo(SensorType::class);
+        return $this->belongsTo(SensorCatalog::class);
     }
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
-    public function sensors()
-    {
-        return $this->hasMany(Sensor::class);
-    }
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
-    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new MessageTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS
@@ -77,6 +70,4 @@ class SensorCatalog extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-
-
 }

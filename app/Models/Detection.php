@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Backpack\CRUD\CrudTrait;
-use App\Scopes\SensorTenantScope;
+use App\Scopes\DetectionTenantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class Sensor extends Model
+class Detection extends Model
 {
     use CrudTrait;
 
@@ -16,11 +16,12 @@ class Sensor extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'sensors';
+    //protected $table = 'detections';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['min_attended','max_attended','longitude','latitude','site_id','sensor_catalog_id','enterprise_id'
+    protected $fillable = [
+        "value","sensor_id","message_id","enterprise_id"
     ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -30,31 +31,26 @@ class Sensor extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
     public function getSensorName()
     {
-        return $this->sensorCatalog->name;
+        return $this->sensor->getSensorName();
     }
-    public function getSiteName()
+    public function getMessageDescription()
     {
-        return $this->site->name;
+        return $this->message->description;
     }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function site()
+    public function message()
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsTo(Message::class);
     }
-    public function sensorCatalog()
+    public function sensor()
     {
-        return $this->belongsTo(SensorCatalog::class);
-    }
-    public function detections()
-    {
-        return $this->hasMany(Detection::class);
+        return $this->belongsTo(Sensor::class);
     }
     /*
     |--------------------------------------------------------------------------
@@ -66,8 +62,9 @@ class Sensor extends Model
     {
         parent::boot();
 
-        static::addGlobalScope(new SensorTenantScope);
+        static::addGlobalScope(new DetectionTenantScope);
     }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

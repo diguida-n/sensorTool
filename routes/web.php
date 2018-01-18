@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
     CRUD::resource('/sitetype', 'Admin\SiteTypeCrudController');
     CRUD::resource('/site', 'Admin\SiteCrudController');
     CRUD::resource('/message', 'Admin\MessageCrudController');
+    CRUD::resource('/detection', 'Admin\DetectionCrudController');
   
   // [...] other routes
 });

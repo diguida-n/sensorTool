@@ -46,6 +46,10 @@ class Message extends Model
     {
         return $this->belongsTo(SensorCatalog::class);
     }
+    public function detections()
+    {
+        return $this->hasMany(Detection::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

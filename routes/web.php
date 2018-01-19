@@ -19,8 +19,12 @@ Route::get('/', 'HomeController@home')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
-  // Backpack\CRUD: Define the resources for the entities you want to CRUD.
-    CRUD::resource('enterprise', 'Admin\EnterpriseCrudController');
+    // Backpack\CRUD: Define the resources for the entities you want to CRUD.
+    CRUD::resource('enterprise', 'Admin\EnterpriseCrudController')->with(function(){
+    // add extra routes to this resource
+        Route::get('/user/add-company-manager/{enterprise}/','Admin\EnterpriseCrudController@addCompanyManager')->name('admin.enterprise.addCompanyManager');
+        Route::post('/user/store-company-manager/{enterprise}/','Admin\EnterpriseCrudController@storeCompanyManager')->name('admin.enterprise.storeCompanyManager');
+    });
     CRUD::resource('/brand', 'Admin\BrandCrudController');
     CRUD::resource('/sensor', 'Admin\SensorCrudController');
     CRUD::resource('/sensortype', 'Admin\SensorTypeCrudController');
@@ -29,12 +33,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
     CRUD::resource('/site', 'Admin\SiteCrudController');
     CRUD::resource('/message', 'Admin\MessageCrudController');
     CRUD::resource('/detection', 'Admin\DetectionCrudController');
-    CRUD::resource('/user', 'Admin\UserCrudControllerCustom');
-
-    Route::group(['prefix' => 'user' ,'middleware'=>'admin'],function ()
-    {
-    	Route::get('/add-company-manager/{admin}/','Admin\EnterpriseCrudController@addCompanyManager')->name('admin.enterprise.addCompanyManager');
-    });
   
   // [...] other routes
 });

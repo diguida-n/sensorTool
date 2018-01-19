@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\EnterpriseRequest as StoreRequest;
 use App\Http\Requests\EnterpriseRequest as UpdateRequest;
+use App\Mail\AddNewCompanyManager;
+use App\Models\Enterprise;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EnterpriseCrudController extends CrudController
 {
@@ -151,13 +153,54 @@ class EnterpriseCrudController extends CrudController
         return $redirect_location;
     }
 
-    public function addCompanyManager()
+    public function addCompanyManager($enterpriseId)
     {
-        return view('admin.addCompanyManager');
+        $data['crud'] = $this->crud;
+        $data['saveAction'] = $this->getSaveAction();
+        unset($data['saveAction']['options']['save_and_edit']);
+        $data['fields'] = [
+            "email" => [
+                "name" => "email",
+                "label" => "Email",
+                'type' => 'text',
+            ]
+        ];
+        $data['title'] = 'Aggiungi Responsabile Aziendale'.' '.$this->crud->entity_name;
+        $data['enterpriseId'] = $enterpriseId;
+        // dd($this->crud->getFields('create'));
+        return view('admin.addCompanyManager',$data);
     }
 
-    public function storeCompanyManager(Request $request)
+    public function storeCompanyManager(Request $request,$enterprise)
     {
-        return redirect('/admin/enterprise');
+        $this->validate($request,['email'=> 'required|email']);
+        $enterprise = Enterprise::find($enterprise)->first();
+        Mail::to($request->email)->send(new AddNewCompanyManager($enterprise));
+        
+        \Alert::success(trans('backpack::crud.insert_success'))->flash();
+        return $this->getRedirectRoute($enterprise);
+    }
+
+    private function getRedirectRoute($itemId = null)
+    {
+        $saveAction = \Request::input('save_action', config('backpack.crud.default_save_action', 'save_and_back'));
+        $itemId = $itemId ? $itemId : \Request::input('id');
+
+        switch ($saveAction) {
+            case 'save_and_new':
+                $redirectUrl = route('admin.enterprise.addCompanyManager',$itemId);
+                break;
+            case 'save_and_edit':
+                $redirectUrl = $this->crud->route.'/'.$itemId.'/edit';
+                if (\Request::has('locale')) {
+                    $redirectUrl .= '?locale='.\Request::input('locale');
+                }
+                break;
+            case 'save_and_back':
+            default:
+                $redirectUrl = $this->crud->route;
+                break;
+        }
+        return \Redirect::to($redirectUrl);
     }
 }

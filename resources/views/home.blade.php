@@ -11,7 +11,7 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Benvenuti sulla nostra Platform!</div>
+                <div class="intro-lead-in">Benvenuti sulla nostra Piattaforma!</div>
                 <div class="intro-heading">La scelta migliore per il tuo Business!</div>
                 <a href="#services" class="page-scroll btn btn-xl">Cosa Offriamo</a>
             </div>

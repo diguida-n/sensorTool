@@ -4,7 +4,6 @@
 
 @section('style')
 
-    <link href="/css/agency.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -12,9 +11,9 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To Our Platform!</div>
-                <div class="intro-heading">The best choise for your Business!</div>
-                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+                <div class="intro-lead-in">Benvenuti sulla nostra Platform!</div>
+                <div class="intro-heading">La scelta migliore per il tuo Business!</div>
+                <a href="#services" class="page-scroll btn btn-xl">Cosa Offriamo</a>
             </div>
         </div>
     </header>
@@ -168,8 +167,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">About Us</h2>
+                    <h3 class="section-subheading text-muted">Dagli albori ad oggi, ecco chi siamo.</h3>
                 </div>
             </div>
             <div class="row">
@@ -334,28 +333,28 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                    <input type="text" class="form-control" placeholder="Nome e Cognome *" id="name" required data-validation-required-message="Inserire nome e cognome.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                    <input type="email" class="form-control" placeholder="Email *" id="email" required data-validation-required-message="Inserire indirizzo email.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                    <input type="tel" class="form-control" placeholder="Telefono *" id="phone" required data-validation-required-message="Inserire numero di telefono.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <textarea class="form-control" placeholder="Messaggio *" id="message" required data-validation-required-message="Inserire messaggio."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Send Message</button>
+                                <button type="submit" class="btn btn-xl">Invia</button>
                             </div>
                         </div>
                     </form>

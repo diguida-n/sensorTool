@@ -9,12 +9,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 
+use Lab404\Impersonate\Models\Impersonate;
+
 class User extends Authenticatable
 {
     use Notifiable;
     
     use CrudTrait; // <----- this
     use HasRoles; // <------ and this
+
+    use Impersonate;
 
     /**
      * The attributes that are mass assignable.
@@ -58,5 +62,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->HasRole("Admin")?true:false;
+    }
+
+    public function getImpersonateButton()
+    {
+        if(auth()->user()->id!=$this->id)
+            return "<a class='btn btn-xs btn-default' href='". route('impersonate', $this->id)  ."'><i class='fa fa-eye'></i>Impersonifica</a>";
     }
 }

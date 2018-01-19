@@ -16,14 +16,31 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <div class="box-title">{{ trans('backpack::base.login_status') }}</div>
-                </div>
+        <div class="col-md-8 col-md-offset-2">
+            <!-- Default box -->
+            @if ($crud->hasAccess('list'))
+                <a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
+            @endif
 
-                <div class="box-body">{{ trans('backpack::base.logged_in') }}</div>
-            </div>
+            @include('crud::inc.grouped_errors')
+
+              {!! Form::open(array('url' => route('admin.enterprise.storeCompanyManager',$enterpriseId), 'method' => 'post')) !!}
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">{{ trans('backpack::crud.add_a_new') }} Responsabile aziendale</h3>
+                </div>
+                <div class="box-body row">
+                    @include('crud::form_content', [ 'fields' => $fields, 'action' => 'create' ])
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+
+                    @include('crud::inc.form_save_buttons')
+
+                </div><!-- /.box-footer-->
+
+              </div><!-- /.box -->
+              {!! Form::close() !!}
         </div>
     </div>
 @endsection

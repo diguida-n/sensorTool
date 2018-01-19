@@ -13,6 +13,8 @@
 
 Auth::routes();
 
+Route::impersonate();
+
 Route::get('/', 'HomeController@home')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()

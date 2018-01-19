@@ -42,6 +42,10 @@
                                     Logout
                                 </a>
 
+                                @impersonating
+                                    <a href="{{ route('impersonate.leave') }}">Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
+                                @endImpersonating
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>

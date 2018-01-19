@@ -37,6 +37,11 @@ class Enterprise extends Model
             return $address->name.", "."".$address->administrative.", ".$address->city.", ".$address->country;
         return "";
     }
+
+    public function getAddNewCompanyManager()
+    {
+        return '<a href="'.route('admin.enterprise.addCompanyManager',$this->id).'" class="btn btn-xs btn-default"><i aria-hidden="true" class="fa fa-user"></i> + Company Manager</a>';
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

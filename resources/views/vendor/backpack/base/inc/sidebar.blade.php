@@ -27,7 +27,7 @@
             @if(auth()->user()->isAdmin())
                 <li>
                     <a href="{{ backpack_url('enterprise') }}">
-                        <i class="fa fa-files-o"></i> 
+                        <i class="fa fa-industry"></i> 
                         <span>Imprese</span>
                     </a>
                 </li>
@@ -118,6 +118,12 @@
                             <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/message') }}">
                                 <i class="fa fa-envelope-o"></i>
                                 <span>Messaggi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/detection') }}">
+                                <i class="fa fa-hdd-o"></i>
+                                <span>Rilevazioni</span>
                             </a>
                         </li>
                     </ul>

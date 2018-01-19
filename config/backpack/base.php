@@ -16,7 +16,7 @@ return [
 
     // Menu logos
     'logo_lg'   => '<b>Sensor</b>Tool',
-    'logo_mini' => '<b>ST</b>p',
+    'logo_mini' => '<b>ST</b>',
 
     // Developer or company name. Shown in footer.
     'developer_name' => 'StudentTool',

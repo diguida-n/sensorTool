@@ -22,6 +22,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
     CRUD::resource('/brand', 'Admin\BrandCrudController');
     CRUD::resource('/sensortype', 'Admin\SensorTypeCrudController');
     CRUD::resource('/sensorcatalog', 'Admin\SensorCatalogCrudController');
+
+
+    Route::group(['prefix' => 'user' ,'middleware'=>'admin'],function ()
+    {
+    	Route::get('/add-company-manager/{admin}/','Admin\EnterpriseCrudController@addCompanyManager')->name('admin.enterprise.addCompanyManager');
+    });
   
   // [...] other routes
 });

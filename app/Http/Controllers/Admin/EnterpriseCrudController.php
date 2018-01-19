@@ -78,6 +78,7 @@ class EnterpriseCrudController extends CrudController
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);
 
         // ------ CRUD BUTTONS
+        $this->crud->addButtonFromModelFunction("line",'addNewCompanyManager','getAddNewCompanyManager','end');
         // possible positions: 'beginning' and 'end'; defaults to 'beginning' for the 'line' stack, 'end' for the others;
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
         // $this->crud->addButtonFromModelFunction($stack, $name, $model_function_name, $position); // add a button whose HTML is returned by a method in the CRUD model
@@ -148,5 +149,15 @@ class EnterpriseCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function addCompanyManager()
+    {
+        return view('admin.addCompanyManager');
+    }
+
+    public function storeCompanyManager(Request $request)
+    {
+        return redirect('/admin/enterprise');
     }
 }

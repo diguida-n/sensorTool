@@ -34,18 +34,18 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="background: #e7e7e7;">
                             <li>
-                                <a href="{{route('backpack')}}">
+                                <a href="{{route('backpack')}}" style="color: black;">
                                     Pannello Admin
                                 </a>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();" style="color: black;">
                                     Logout
                                 </a>
                                 @impersonating
-                                    <a href="{{ route('impersonate.leave') }}">Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
+                                    <a href="{{ route('impersonate.leave') }}" style="color: black;">Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
                                 @endImpersonating
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

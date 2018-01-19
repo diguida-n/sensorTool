@@ -24,34 +24,42 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">Servizi</h2>
+                    <h3 class="section-subheading text-muted">Le nostre conoscenze al vostro servizio.</h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
+                <div class="col-md-3">
+                    <span class="fa-stack fa-3x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted"></p>
                 </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
+                <div class="col-md-3">
+                    <span class="fa-stack fa-3x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-dashboard fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Gestionali</h4>
+                    <p class="text-muted"></p>
+                </div>
+                <div class="col-md-3">
+                    <span class="fa-stack fa-3x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="service-heading">Design Responsive</h4>
+                    <p class="text-muted"></p>
                 </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
+                <div class="col-md-3">
+                    <span class="fa-stack fa-3x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted"></p>
                 </div>
             </div>
         </div>
@@ -63,7 +71,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">I nostri cavalli di battaglia.</h3>
                 </div>
             </div>
             <div class="row">
@@ -248,14 +256,14 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
                         <h4>Alberto Madio</h4>
                         <p class="text-muted">Lead Designer</p>
                         <ul class="list-inline social-buttons">
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.facebook.com/alberto.madio" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="#"><i class="fa fa-linkedin" target="_blank"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -267,37 +275,37 @@
                         <p class="text-muted">Lead Developer</p>
                         <ul class="list-inline social-buttons">
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.facebook.com/giampiero.cascarano" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="https://www.linkedin.com/in/giampiero-cascarano-215309140/"><i class="fa fa-linkedin" target="_blank"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
                         <h4>Vito Di Bari</h4>
                         <p class="text-muted">Lead Marketer</p>
                         <ul class="list-inline social-buttons">
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.facebook.com/vito.bari.3" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="https://www.linkedin.com/in/vito-di-bari-834309140/" target="_blank"><i class="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/4.jpg" class="img-responsive img-circle" alt="">
                         <h4>Nico Di Guida</h4>
                         <p class="text-muted">Lead Developer</p>
                         <ul class="list-inline social-buttons">
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.facebook.com/bboybother" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="https://www.linkedin.com/in/nicola-di-guida-82b403147/" target="_blank"><i class="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -305,7 +313,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                    <p class="large text-muted">Si sono conosciuti per caso, hanno combinato le loro conoscenze per lo sviluppo di prodotti innovativi e all'avanguardia</p>
                 </div>
             </div>
         </div>
@@ -317,7 +325,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Chiedete dei nostri prodotti, siamo a vostra completa disposizione.</h3>
                 </div>
             </div>
             <div class="row">

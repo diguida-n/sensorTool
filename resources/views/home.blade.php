@@ -248,7 +248,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
                         <h4>Alberto Madio</h4>
                         <p class="text-muted">Lead Designer</p>
                         <ul class="list-inline social-buttons">
@@ -290,7 +290,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
                         <h4>Nico Di Guida</h4>
                         <p class="text-muted">Lead Developer</p>
                         <ul class="list-inline social-buttons">

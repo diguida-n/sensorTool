@@ -1,7 +1,7 @@
 @component('mail::message')
 # 
 
-Sei appena stato invitato a registrarti come Responsabile aziendale presso l'aziend {{ $enterprise->businessName}}
+Sei appena stato invitato a registrarti come Responsabile aziendale presso l'aziend {{ $enterprise}}
 
 @component('mail::button', ['url' => $url])
 Registrati

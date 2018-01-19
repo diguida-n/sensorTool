@@ -34,6 +34,12 @@ class AddNewCompanyManager extends Mailable
     {
         $url = $this->url;
         $enterprise = $this->enterprise;
-        return $this->view('email.addNewCompanyManager',compact('url','enterprise'));
+        return $this->from('sensortoolsrl@gmail.com',"SensorTool srl")
+            ->markdown('email.addNewCompanyManager')
+            ->with([
+                'url' => $this->url,
+                'enterprise' => $this->enterprise->businessName
+            ]);
+        // return $this->view('email.addNewCompanyManager',compact('url','enterprise'));
     }
 }

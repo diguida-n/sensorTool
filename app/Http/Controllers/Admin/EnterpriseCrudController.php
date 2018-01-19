@@ -175,7 +175,7 @@ class EnterpriseCrudController extends CrudController
     {
         $this->validate($request,['email'=> 'required|email']);
         $enterprise = Enterprise::find($enterprise)->first();
-        Mail::to($request->email)->queue(new AddNewCompanyManager($enterprise));
+        Mail::to($request->email)->send(new AddNewCompanyManager($enterprise));
         
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
         return $this->getRedirectRoute($enterprise);

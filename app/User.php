@@ -50,4 +50,13 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Enterprise::class());
     }
+
+    public function isCompanyManager()
+    {
+        return $this->HasRole("Company Manager")?true:false;
+    }
+    public function isAdmin()
+    {
+        return $this->HasRole("Admin")?true:false;
+    }
 }

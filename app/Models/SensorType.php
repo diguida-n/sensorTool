@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class SensorType extends Model
 {
@@ -34,6 +34,10 @@ class SensorType extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function sensorCatalogs()
+    {
+        return $this->hasMany(SensorCatalog::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -52,8 +56,4 @@ class SensorType extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function sensorCatalogs()
-    {
-        return $this->hasMany(SensorCatalog::class);
-    }
 }

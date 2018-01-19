@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\EnterpriseTenantScope;
 use App\User;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -52,12 +53,22 @@ class Enterprise extends Model
         return $this->hasMany(User::class(),'enterprise_id');
     }
 
+    public function sites()
+    {
+        return $this->hasMany(Site::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new EnterpriseTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

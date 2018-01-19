@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Backpack\CRUD\CrudTrait;
+use App\Scopes\SensorTenantScope;
 use Illuminate\Database\Eloquent\Model;
 
-class SensorCatalog extends Model
+class Sensor extends Model
 {
     use CrudTrait;
 
@@ -15,11 +16,12 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'sensor_catalogs';
+    //protected $table = 'sensors';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ["name","description","min_detectable","max_detectable","sensor_type_id","brand_id"];
+    protected $fillable = ['min_attended','max_attended','longitude','latitude','site_id','sensor_catalog_id','enterprise_id'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -29,36 +31,30 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getBrandName($value='')
+    public function getSensorName()
     {
-        return $this->brand->name;
+        return $this->sensorCatalog->name;
     }
-    
-    public function getSensorTypeName($value='')
+    public function getSiteName()
     {
-        return $this->sensorType->name;
+        return $this->site->name;
     }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function sensorType()
+    public function site()
     {
-        return $this->belongsTo(SensorType::class);
+        return $this->belongsTo(Site::class);
     }
-    public function brand()
+    public function sensorCatalog()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(SensorCatalog::class);
     }
-    public function sensors()
+    public function detections()
     {
-        return $this->hasMany(Sensor::class);
-    }
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Detection::class);
     }
     /*
     |--------------------------------------------------------------------------
@@ -66,6 +62,12 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SensorTenantScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS
@@ -77,6 +79,4 @@ class SensorCatalog extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-
-
 }

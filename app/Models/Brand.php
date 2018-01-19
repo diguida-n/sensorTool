@@ -34,6 +34,11 @@ class Brand extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    
+    public function sensorCatalogs()
+    {
+        return $this->hasMany(SensorCatalog::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -52,8 +57,4 @@ class Brand extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function sensorCatalogs()
-    {
-        return $this->hasMany(SensorCatalog::class);
-    }
 }

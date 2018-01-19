@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="mainNav">
     <div class="container">
         <div class="navbar-header">
 
@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand page-scroll" href="#page-top">
                 SensorTool
             </a>
         </div>
@@ -36,12 +36,14 @@
 
                         <ul class="dropdown-menu">
                             <li>
+                                <a href="{{route('backpack')}}">
+                                    Pannello Admin
+                                </a>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
-
                                 @impersonating
                                     <a href="{{ route('impersonate.leave') }}">Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
                                 @endImpersonating

@@ -65,7 +65,7 @@
     </section>
 
     <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
+    <section id="portfolio" class="bg-light-gray" style="display: none;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -163,7 +163,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="bg-light-gray" style="display: none;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

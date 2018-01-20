@@ -262,7 +262,7 @@
                             </li>
                             <li><a href="https://www.facebook.com/alberto.madio" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin" target="_blank"></i></a>
+                            <li><a href="https://www.linkedin.com/in/alberto-madio-b7378b157/"><i class="fa fa-linkedin" target="_blank"></i></a>
                             </li>
                         </ul>
                     </div>

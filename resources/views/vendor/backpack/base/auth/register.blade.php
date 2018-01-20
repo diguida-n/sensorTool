@@ -66,6 +66,9 @@
                                 @endif
                             </div>
                         </div>
+                        @if( $cryptedData)
+                            <input type="hidden" value="{!!$cryptedData!!}">
+                        @endif
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

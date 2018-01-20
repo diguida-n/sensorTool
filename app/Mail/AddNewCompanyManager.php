@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class AddNewCompanyManager extends Mailable
 {
@@ -14,15 +16,26 @@ class AddNewCompanyManager extends Mailable
 
     protected $enterprise;
     protected $url;
+    protected $cryptedData;
+    protected $role;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Enterprise $enterprise)
+    public function __construct(Enterprise $enterprise,$role)
     {
         $this->enterprise = $enterprise;
-        $this->url = url('admin/register');
+        $this->role = $role;
+        $cryptedData = [];
+
+        $cryptedData['role'] = $role;
+        $cryptedData['enterprise_id'] = $enterprise->id;
+        $cryptedData['expiring_date'] = Carbon::tomorrow('Europe/Rome');
+        $this->cryptedData = Crypt::encryptString(json_encode($cryptedData));
+
+        $this->url = route('registerUser',$this->cryptedData);
+
     }
 
     /**
@@ -38,7 +51,8 @@ class AddNewCompanyManager extends Mailable
             ->markdown('email.addNewCompanyManager')
             ->with([
                 'url' => $this->url,
-                'enterprise' => $this->enterprise->businessName
+                'enterprise' => $this->enterprise->businessName,
+                'role' => $this->role,
             ]);
         // return $this->view('email.addNewCompanyManager',compact('url','enterprise'));
     }

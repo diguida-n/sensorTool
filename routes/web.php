@@ -16,6 +16,7 @@ Auth::routes();
 Route::impersonate();
 
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/admin/register/{cryptedData?}','Auth\RegisterUserController@showRegistrationForm')->name('registerUser');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {

@@ -12,19 +12,22 @@
                 <!-- ================================================ -->
                 <!-- ==== Recommended place for admin menu items ==== -->
                 <!-- ================================================ -->
+            @if(auth()->user()->isEmployee())
             <li>
                 <a href="{{ backpack_url('dashboard') }}">
                     <i class="fa fa-dashboard"></i> 
                     <span>{{ trans('backpack::base.dashboard') }}</span>
                 </a>
             </li>
+            @endif
+            
+            @if(auth()->user()->isAdmin())
             <li>
                 <a href="{{ backpack_url('elfinder') }}">
                     <i class="fa fa-files-o"></i> 
                     <span>File manager</span>
                 </a>
             </li>
-            @if(auth()->user()->isAdmin())
                 <li>
                     <a href="{{ backpack_url('enterprise') }}">
                         <i class="fa fa-industry"></i> 

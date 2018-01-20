@@ -18,6 +18,7 @@ Route::impersonate();
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/admin/register','Auth\RegisterUserController@showRegistrationForm')->name('backpack.auth.register');
 
+Route::post('/submitInfoRequest', 'HomeController@submitInfoRequest')->name('submitInfoRequest');
 Route::get('/admin/register/{cryptedData?}','Auth\RegisterUserController@showRegistrationForm')->name('registerUser');
 Route::post('/admin/register','Auth\RegisterUserController@register')->name('storeUser');
 

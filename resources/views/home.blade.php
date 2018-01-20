@@ -12,7 +12,7 @@
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in">Benvenuti sulla nostra Piattaforma!</div>
-                <div class="intro-heading">La scelta migliore per il tuo Business!</div>
+                <div class="intro-heading">La scelta migliore per i tuoi sensori!</div>
                 <a href="#services" class="page-scroll btn btn-xl">Cosa Offriamo</a>
             </div>
         </div>
@@ -248,7 +248,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
+                    <h2 class="section-heading">Il nostro Team</h2>
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
@@ -329,28 +329,29 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form action="/submitInfoRequest" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nome e Cognome *" id="name" required data-validation-required-message="Inserire nome e cognome.">
+                                    <input type="text" class="form-control" placeholder="Nome e Cognome *" id="name" name="name">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email *" id="email" required data-validation-required-message="Inserire indirizzo email.">
+                                    <input type="email" class="form-control" placeholder="Email" id="email" name="email">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Telefono *" id="phone" required data-validation-required-message="Inserire numero di telefono.">
+                                    <input type="tel" class="form-control" placeholder="Telefono *" id="phone" name="phone">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Messaggio *" id="message" required data-validation-required-message="Inserire messaggio."></textarea>
+                                    <textarea class="form-control" placeholder="Messaggio *" id="message" name="message"></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
+                            {{ csrf_field() }}
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
@@ -577,7 +578,6 @@
 @section('script')
     <!-- Contact form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
-    <script src="/js/contact_me.js"></script>
     <!-- Plugin JavaScript -->
     <script src="/js/jquery-easing/jquery.easing.min.js"></script>
 

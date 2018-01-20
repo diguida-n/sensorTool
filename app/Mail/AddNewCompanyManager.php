@@ -31,7 +31,7 @@ class AddNewCompanyManager extends Mailable
 
         $cryptedData['role'] = $role;
         $cryptedData['enterprise_id'] = $enterprise->id;
-        $cryptedData['expiring_date'] = Carbon::tomorrow('Europe/Rome');
+        $cryptedData['expiring_date'] = Carbon::now('Europe/Rome')->addDay()->toDateTimeString();
         $this->cryptedData = Crypt::encryptString(json_encode($cryptedData));
 
         $this->url = route('registerUser',$this->cryptedData);

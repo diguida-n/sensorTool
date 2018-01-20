@@ -10,7 +10,12 @@
                 <div class="box-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('backpack.auth.register') }}">
                         {!! csrf_field() !!}
-
+                        
+                        @if ($errors->has('cryptedData'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cryptedData') }}</strong>
+                                    </span>
+                                @endif
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">{{ trans('backpack::base.name') }}</label>
 
@@ -66,8 +71,8 @@
                                 @endif
                             </div>
                         </div>
-                        @if( $cryptedData)
-                            <input type="hidden" value="{!!$cryptedData!!}">
+                        @if( !is_null($cryptedData))
+                            <input type="text"  name="cryptedData" value="{!!$cryptedData!!}" >
                         @endif
 
                         <div class="form-group">

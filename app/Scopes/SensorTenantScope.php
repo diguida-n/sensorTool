@@ -16,7 +16,7 @@ class SensorTenantScope implements Scope
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function apply(Builder $builder)
+    public function apply(Builder $builder,Model $model)
     {
         
         $user = Auth::user();

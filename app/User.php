@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function enterprise()
     {
-        return $this->belongsTo(Enterprise::class());
+        return $this->belongsTo(Enterprise::class);
     }
 
     public function isEmployee()

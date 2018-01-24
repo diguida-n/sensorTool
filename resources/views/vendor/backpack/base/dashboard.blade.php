@@ -39,12 +39,16 @@
   transform: scale(1.1);
   filter: url(#shadow);
 }
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover,
+.nav-tabs>li>a, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover{
+    border-color: #3c8dbc;
+}
 </style>
 
 @endsection
 @section('header')
-    <section class="content-header">
-      <h1>
+    <section class="content-header" style="padding-top: 10px;">
+      <h1>{{auth()->user()->enterprise->businessName}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ backpack_url() }}">{{ config('backpack.base.project_name') }}</a></li>
@@ -55,12 +59,27 @@
 
 
 @section('content')
+
     <div class="row">
-        <div class="col-md-6">
-            <div id="chartdiv"></div>
-        </div>
-        <div class="col-md-6">
-            <div id="chartdivPie"></div>
+        <ul class="nav nav-tabs">
+        @foreach(auth()->user()->enterprise->sites as $index=>$site)
+          <li class="{{$index==0?'active':''}}">
+            <a data-toggle="tab" href="#site{{$site->id}}">{{$site->name}}</a>
+          </li>
+        @endforeach
+        <div class="tab-content">
+            @foreach(auth()->user()->enterprise->sites as $index=>$site)
+              <div id="site{{$site->id}}" class="tab-pane fade {{$index==0?'in active':''}}">
+              @if($index==0)
+                <div class="col-md-6">
+                    <div id="chartdiv"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="chartdivPie"></div>
+                </div>
+                @endif
+              </div>
+            @endforeach
         </div>
     </div>
 @endsection
@@ -372,7 +391,7 @@ chartPie.addListener("rollOverSlice", function(e) {
 });
 
 function handleInit(){
-  chartPie.legend.addListener("rollOverItem", handleRollOver);
+  //chartPie.legend.addListener("rollOverItem", handleRollOver);
 }
 
 function handleRollOver(e){

@@ -39,11 +39,20 @@ class Detection extends Model
     {
         return $this->message->description;
     }
+    public function getValueDecodedForTable()
+    {
+       return '<span data-toggle="tooltip" data-placement="top" title="'.$this->value.'!" style="cursor:pointer;">'.$this->getValueDecoded().'</span>';
+    }
+
     public function getValueDecoded()
     {
-       $stringExploded = explode("*", $this->value);
-       return '<span data-toggle="tooltip" data-placement="top" title="'.$this->value.'!" style="cursor:pointer;">'.$stringExploded[5].'</span>';
-       return $stringExploded[5];
+        $stringExploded = explode("*", $this->value);
+        return $stringExploded[5];
+    }
+
+    public function getSite()
+    {
+        return $this->sensor->site->name;
     }
     /*
     |--------------------------------------------------------------------------

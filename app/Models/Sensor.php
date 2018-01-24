@@ -41,16 +41,16 @@ class Sensor extends Model
     }
     public function getSensorBrand()
     {
-        return $this->sensorCatalog->brand->id;
+        return $this->sensorCatalog->brand;
     }
     public function getSensorType()
     {
-        return $this->sensorCatalog->sensorType->id;
+        return $this->sensorCatalog->sensorType;
     }
 
     public function getTrasmissionProtocolIdentifier()
     {
-        return $adapterIdentifier = $this->id."*".$this->getSensorBrand()."*".$this->getSensorType();
+        return $adapterIdentifier = $this->id."*".$this->getSensorBrand()->id."*".$this->getSensorType()->id;
     }
     /*
     |--------------------------------------------------------------------------

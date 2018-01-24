@@ -66,7 +66,7 @@ class DetectionCrudController extends CrudController
             'name' => 'value',
             'label' => 'Valore registrato',
             'type' => "model_function",
-            'function_name' => 'getValueDecoded',
+            'function_name' => 'getValueDecodedForTable',
         ]);
         $this->crud->addColumn([
             'name' => 'sensor_id',
@@ -79,6 +79,12 @@ class DetectionCrudController extends CrudController
             'label' => 'Messaggio',
             'type' => "model_function",
             'function_name' => 'getMessageDescription',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'site',
+            'label' => 'Sito',
+            'type' => "model_function",
+            'function_name' => 'getSite',
         ]);
         $this->crud->removeColumn('enterprise_id'); // remove a column from the stack
         // $this->crud->addColumn(); // add a single column, at the end of the stack

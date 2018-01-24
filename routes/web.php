@@ -22,6 +22,11 @@ Route::post('/submitInfoRequest', 'HomeController@submitInfoRequest')->name('sub
 Route::get('/admin/register/{cryptedData?}','Auth\RegisterUserController@showRegistrationForm')->name('registerUser');
 Route::post('/admin/register','Auth\RegisterUserController@register')->name('storeUser');
 
+Route::group(['prefix'=>'employee'],function()
+{
+    Route::post('/getSensorsData/{site}','DetectionController@getSensorsData');
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
     // Backpack\CRUD: Define the resources for the entities you want to CRUD.

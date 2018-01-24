@@ -42,7 +42,7 @@ class Detection extends Model
     public function getValueDecoded()
     {
        $stringExploded = explode("*", $this->value);
-       return '<a href="#" data-toggle="tooltip" data-placement="top" title="'.$this->value.'!">'.$stringExploded[5].'</a>';
+       return '<span data-toggle="tooltip" data-placement="top" title="'.$this->value.'!" style="cursor:pointer;">'.$stringExploded[5].'</span>';
        return $stringExploded[5];
     }
     /*

@@ -221,7 +221,7 @@ class DemoSeeder extends Seeder
 	        	'max_attended'=>35.0,
 	        	'longitude'=>null,
 	        	'latitude'=>null,
-	        	'site_id'=>1,
+	        	'site_id'=>3,
 	        	'sensor_catalog_id'=>2,
 	        	'enterprise_id'=>1
 	        ],[
@@ -230,7 +230,7 @@ class DemoSeeder extends Seeder
 	        	'max_attended'=>1500,
 	        	'longitude'=>null,
 	        	'latitude'=>null,
-	        	'site_id'=>1,
+	        	'site_id'=>3,
 	        	'sensor_catalog_id'=>3,
 	        	'enterprise_id'=>1
 	        ],[
@@ -239,7 +239,7 @@ class DemoSeeder extends Seeder
 	        	'max_attended'=>85,
 	        	'longitude'=>null,
 	        	'latitude'=>null,
-	        	'site_id'=>1,
+	        	'site_id'=>3,
 	        	'sensor_catalog_id'=>4,
 	        	'enterprise_id'=>1
 	        ],[
@@ -248,7 +248,7 @@ class DemoSeeder extends Seeder
 	        	'max_attended'=>160.00,
 	        	'longitude'=>null,
 	        	'latitude'=>null,
-	        	'site_id'=>1,
+	        	'site_id'=>3,
 	        	'sensor_catalog_id'=>5,
 	        	'enterprise_id'=>1
 	        ]

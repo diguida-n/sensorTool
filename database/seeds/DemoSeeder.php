@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder
@@ -309,10 +310,15 @@ class DemoSeeder extends Seeder
 
 	   		}
 	   		$description = "OK";
-	   		if($malfunction)
+	   		$sensorDescription = "OK";
+	   		if($malfunction){
+	   			$sensorDescription="Malfunction";
 	   			$description = "Malfunzionamento! Valore rilevato al di sotto della soglia minima percepibile dal sensore";
-	   		if($exception)
+	   		}
+	   		if($exception){
+	   			$sensorDescription="Exception";
 	   			$description = "Eccezione! Valore rilevato al di sotto della soglia minima aspettata dal sensore";
+	   		}
 	   		$messageData = [
         		'malfunction'=>$malfunction,
         		'exception'=>$exception,
@@ -321,8 +327,15 @@ class DemoSeeder extends Seeder
         		'enterprise_id'=>1
         	];
 	   		$m = App\Models\Message::create($messageData);
+	   		$trueValue = $s->getTrasmissionProtocolIdentifier();
+	   		$now = Carbon::now();
+	   		$now = str_replace("-", "/", $now);
+	   		$now = str_replace(" ", "*", $now);
+
+	   		$trueValue.="*".$now."*".$value."*".$sensorDescription;
+	   		echo $trueValue."\n";
 	   		App\Models\Detection::create([
-	   			"value"=>$value,
+	   			"value"=>$trueValue,
 	   			"sensor_id"=>$s->id,
 	   			"message_id"=>$m->id,
 	   			"enterprise_id"=>1

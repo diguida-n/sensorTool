@@ -39,6 +39,12 @@ class Detection extends Model
     {
         return $this->message->description;
     }
+    public function getValueDecoded()
+    {
+       $stringExploded = explode("*", $this->value);
+       return '<a href="#" data-toggle="tooltip" data-placement="top" title="'.$this->value.'!">'.$stringExploded[5].'</a>';
+       return $stringExploded[5];
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

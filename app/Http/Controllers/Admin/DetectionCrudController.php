@@ -65,6 +65,8 @@ class DetectionCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'value',
             'label' => 'Valore registrato',
+            'type' => "model_function",
+            'function_name' => 'getValueDecoded',
         ]);
         $this->crud->addColumn([
             'name' => 'sensor_id',

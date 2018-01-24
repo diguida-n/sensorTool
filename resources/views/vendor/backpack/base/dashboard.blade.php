@@ -62,25 +62,27 @@
 
     <div class="row">
         <ul class="nav nav-tabs">
-        @foreach(auth()->user()->enterprise->sites as $index=>$site)
-          <li class="{{$index==0?'active':''}}">
-            <a data-toggle="tab" href="#site{{$site->id}}">{{$site->name}}</a>
-          </li>
-        @endforeach
-        <div class="tab-content">
+        @if(auth()->user()->enterprise)
             @foreach(auth()->user()->enterprise->sites as $index=>$site)
-              <div id="site{{$site->id}}" class="tab-pane fade {{$index==0?'in active':''}}">
-              @if($index==0)
-                <div class="col-md-6">
-                    <div id="chartdiv"></div>
-                </div>
-                <div class="col-md-6">
-                    <div id="chartdivPie"></div>
-                </div>
-                @endif
-              </div>
+              <li class="{{$index==0?'active':''}}">
+                <a data-toggle="tab" href="#site{{$site->id}}">{{$site->name}}</a>
+              </li>
             @endforeach
-        </div>
+            <div class="tab-content">
+                @foreach(auth()->user()->enterprise->sites as $index=>$site)
+                  <div id="site{{$site->id}}" class="tab-pane fade {{$index==0?'in active':''}}">
+                  @if($index==0)
+                    <div class="col-md-6">
+                        <div id="chartdiv"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="chartdivPie"></div>
+                    </div>
+                    @endif
+                  </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection
 

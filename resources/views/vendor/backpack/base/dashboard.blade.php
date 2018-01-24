@@ -48,7 +48,7 @@
 @endsection
 @section('header')
     <section class="content-header" style="padding-top: 10px;">
-      <h1>{{auth()->user()->enterprise->businessName}}
+      <h1>{{auth()->user()->enterprise?auth()->user()->enterprise->businessName:''}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ backpack_url() }}">{{ config('backpack.base.project_name') }}</a></li>

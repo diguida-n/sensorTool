@@ -29,12 +29,12 @@ class SensorCatalog extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getBrandName($value='')
+    public function getBrandName()
     {
         return $this->brand->name;
     }
     
-    public function getSensorTypeName($value='')
+    public function getSensorTypeName()
     {
         return $this->sensorType->name;
     }

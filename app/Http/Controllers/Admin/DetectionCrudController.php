@@ -20,7 +20,7 @@ class DetectionCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Detection');
         $this->crud->setRoute('/employee/detection');
-        $this->crud->setEntityNameStrings('Rilevamento', 'Rilevamenti');
+        $this->crud->setEntityNameStrings('Dato', 'Dati');
 
         /*
         |--------------------------------------------------------------------------

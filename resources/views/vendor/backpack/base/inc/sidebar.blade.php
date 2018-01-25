@@ -127,12 +127,12 @@
                                     <span>Messaggi</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ url('/employee/detection') }}">
-                                    <i class="fa fa-hdd-o"></i>
-                                    <span>Rilevazioni</span>
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ url('/employee/detection') }}">
+                                <i class="fa fa-hdd-o"></i>
+                                <span>Dati</span>
+                            </a>
+                        </li>
                         @endif
                     </ul>
                 </li>

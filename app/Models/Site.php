@@ -38,6 +38,13 @@ class Site extends Model
     {
         return $this->siteType->name;
     }
+
+    public function getImage()
+    {
+        if($this->map)
+            return '<img src="'.$this->map.'" alt="Red dot" height="50">';
+        return '-';
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

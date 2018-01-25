@@ -35,7 +35,7 @@
 
                         <ul class="dropdown-menu" style="background: #222;border:0;">
                             <li>
-                                <a href="{{route('backpack')}}">
+                                <a href="{{url('/admin')}}">
                                     Area riservata
                                 </a>
                                 <a href="{{ route('logout') }}"

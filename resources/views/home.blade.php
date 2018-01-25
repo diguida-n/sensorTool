@@ -283,20 +283,6 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Vito Di Bari</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            </li>
-                            <li><a href="https://www.facebook.com/vito.bari.3" target="_blank"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="https://www.linkedin.com/in/vito-di-bari-834309140/" target="_blank"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
                         <img src="img/team/4.jpg" class="img-responsive img-circle" alt="">
                         <h4>Nico Di Guida</h4>
                         <p class="text-muted">Lead Developer</p>
@@ -305,6 +291,20 @@
                             <li><a href="https://www.facebook.com/bboybother" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
                             <li><a href="https://www.linkedin.com/in/nicola-di-guida-82b403147/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Vito Di Bari</h4>
+                        <p class="text-muted">Lead Marketer</p>
+                        <ul class="list-inline social-buttons">
+                            </li>
+                            <li><a href="https://www.facebook.com/vito.bari.3" target="_blank"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://www.linkedin.com/in/vito-di-bari-834309140/" target="_blank"><i class="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>

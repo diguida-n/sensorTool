@@ -19,7 +19,7 @@ class SiteCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Site');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/site');
+        $this->crud->setRoute('/companyManager/site');
         $this->crud->setEntityNameStrings('Sito', 'Siti');
 
         /*

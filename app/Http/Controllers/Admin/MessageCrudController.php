@@ -19,7 +19,7 @@ class MessageCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Message');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/message');
+        $this->crud->setRoute('/employee/message');
         $this->crud->setEntityNameStrings('Messaggio', 'Tipi di messaggio');
 
         /*
@@ -101,6 +101,12 @@ class MessageCrudController extends CrudController
             'label' => 'Descrizione',
         ]);
 
+        $this->crud->addColumn([
+            'name' => 'created_at',
+            'label' => 'Data acquisizione',
+            'type' => 'datetime'
+        ]);
+
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
@@ -113,6 +119,7 @@ class MessageCrudController extends CrudController
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
         // $this->crud->addButtonFromModelFunction($stack, $name, $model_function_name, $position); // add a button whose HTML is returned by a method in the CRUD model
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
+        $this->crud->removeAllButtons();
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
         // $this->crud->removeAllButtons();

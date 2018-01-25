@@ -19,7 +19,7 @@ class SiteTypeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\SiteType');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/sitetype');
+        $this->crud->setRoute('/companyManager/sitetype');
         $this->crud->setEntityNameStrings('Tipo di sito', 'Tipi di siti');
 
         /*

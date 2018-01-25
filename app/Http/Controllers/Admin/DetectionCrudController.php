@@ -20,7 +20,7 @@ class DetectionCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Detection');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/detection');
-        $this->crud->setEntityNameStrings('Rilevamento', 'Rilevamenti');
+        $this->crud->setEntityNameStrings('Dato', 'Dati');
 
         /*
         |--------------------------------------------------------------------------

@@ -126,7 +126,7 @@
                         <li>
                             <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/detection') }}">
                                 <i class="fa fa-hdd-o"></i>
-                                <span>Rilevazioni</span>
+                                <span>Dati</span>
                             </a>
                         </li>
                     </ul>

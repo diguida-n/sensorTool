@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" style="background: #222;border:0;">
                             <li>
                                 <a href="{{route('backpack')}}">
-                                    Pannello Admin
+                                    Area riservata
                                 </a>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

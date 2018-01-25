@@ -19,7 +19,7 @@ class DetectionCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Detection');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/detection');
+        $this->crud->setRoute('/employee/detection');
         $this->crud->setEntityNameStrings('Rilevamento', 'Rilevamenti');
 
         /*
@@ -86,6 +86,12 @@ class DetectionCrudController extends CrudController
             'type' => "model_function",
             'function_name' => 'getSite',
         ]);
+
+        $this->crud->addColumn([
+            'name' => 'created_at',
+            'label' => 'Data acquisizione',
+            'type' => 'datetime'
+        ]);
         $this->crud->removeColumn('enterprise_id'); // remove a column from the stack
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
@@ -99,7 +105,7 @@ class DetectionCrudController extends CrudController
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
         // $this->crud->addButtonFromModelFunction($stack, $name, $model_function_name, $position); // add a button whose HTML is returned by a method in the CRUD model
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
-        // $this->crud->removeButton($name);
+        $this->crud->removeAllButtons();
         // $this->crud->removeButtonFromStack($name, $stack);
         // $this->crud->removeAllButtons();
         // $this->crud->removeAllButtonsFromStack('line');

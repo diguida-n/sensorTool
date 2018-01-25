@@ -19,7 +19,7 @@ class SensorTypeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\SensorType');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/sensortype');
+        $this->crud->setRoute('/companyManager/sensortype');
         $this->crud->setEntityNameStrings('Tipo di sensore', 'Tipi di sensori');
 
         /*

@@ -19,7 +19,7 @@ class SensorCatalogCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\SensorCatalog');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/sensorcatalog');
+        $this->crud->setRoute('/companyManager/sensorcatalog');
         $this->crud->setEntityNameStrings('Catalogo Sensori', 'Catalogo sensori');
 
         /*

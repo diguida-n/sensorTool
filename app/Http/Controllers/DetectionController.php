@@ -55,4 +55,9 @@ class DetectionController extends Controller
     	}
     	return $results;
     }
+    
+    public function dashboard()
+    {
+        return view('backpack::dashboard');
+    }
 }

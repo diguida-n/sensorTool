@@ -15,7 +15,7 @@ class EmployeeMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->isEmployee())
+        if(auth()->user() && (auth()->user()->isEmployee() || auth()->user()->isGuest()))
             return $next($request);
         return redirect(url('/'));
     }   

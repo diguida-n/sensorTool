@@ -162,6 +162,17 @@ class MessageCrudController extends CrudController
         // $this->crud->addClause('whereHas', 'posts', function($query) {
         //     $query->activePosts();
         // });
+
+        if(auth()->user()->isGuest()){
+            $sensors = auth()->user()->site->sensors;
+            $ids = [];
+            foreach ($sensors as $sensor) {
+                foreach($sensor->detections as $d){
+                    $ids[]=$d->message->id;
+                }
+            }
+            $this->crud->addClause('whereIn','id',$ids);
+        }
         // $this->crud->addClause('withoutGlobalScopes');
         // $this->crud->addClause('withoutGlobalScope', VisibleScope::class);
         // $this->crud->with(); // eager load relationships

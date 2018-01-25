@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Enterprise;
+use App\Models\Site;
 use Backpack\Base\app\Notifications\ResetPasswordNotification as ResetPasswordNotification;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','enterprise_id'
+        'name', 'email', 'password','enterprise_id','site_id'
     ];
 
     /**
@@ -54,7 +55,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Enterprise::class);
     }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 
+    public function isGuest()
+    {
+        return $this->HasRole("Guest")?true:false;
+    }
     public function isEmployee()
     {
         return $this->HasRole("Employee")?true:false;

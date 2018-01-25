@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\DetectionRequest as StoreRequest;
 use App\Http\Requests\DetectionRequest as UpdateRequest;
+use App\Models\Site;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 class DetectionCrudController extends CrudController
 {
@@ -147,6 +146,10 @@ class DetectionCrudController extends CrudController
         // $this->crud->addClause('whereHas', 'posts', function($query) {
         //     $query->activePosts();
         // });
+        if(auth()->user()->isGuest()){
+            $detectionsIds = array_values(auth()->user()->site->sensors->pluck('id')->toArray());
+            $this->crud->addClause('whereIn','sensor_id',$detectionsIds);
+        }
         // $this->crud->addClause('withoutGlobalScopes');
         // $this->crud->addClause('withoutGlobalScope', VisibleScope::class);
         // $this->crud->with(); // eager load relationships

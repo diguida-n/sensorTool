@@ -29,7 +29,7 @@ Route::get('/admin/dashboard',function()
 Route::get('/admin',function()
 {
     if(auth()->user()){
-        if(auth()->user()->isEmployee())
+        if(auth()->user()->isEmployee() || (auth()->user()->isGuest() && auth()->user()->site_id))
             return redirect(url('/employee/dashboard'));
         if(auth()->user()->isCompanyManager())
             return redirect(url('/companyManager/site'));
@@ -45,7 +45,6 @@ Route::group(['prefix'=>'employee','middleware'=>'auth.employee'],function()
     CRUD::resource('/message', 'Admin\MessageCrudController');
     CRUD::resource('/detection', 'Admin\DetectionCrudController');
 });
-
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()

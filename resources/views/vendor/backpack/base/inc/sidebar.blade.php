@@ -12,7 +12,7 @@
                 <!-- ================================================ -->
                 <!-- ==== Recommended place for admin menu items ==== -->
                 <!-- ================================================ -->
-            @if(auth()->user()->isEmployee())
+            @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
             <li>
                 <a href="{{ url('employee/dashboard') }}">
                     <i class="fa fa-dashboard"></i> 
@@ -86,7 +86,7 @@
                     </ul>
                 </li>
             @endif
-            @if(auth()->user()->isCompanyManager() || auth()->user()->isEmployee())
+            @if(auth()->user()->isCompanyManager() || auth()->user()->isEmployee() || auth()->user()->isGuest())
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-podcast"></i>
@@ -120,7 +120,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if(auth()->user()->isEmployee())
+                        @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
                             <li>
                                 <a href="{{ url('/employee/message') }}">
                                     <i class="fa fa-envelope-o"></i>

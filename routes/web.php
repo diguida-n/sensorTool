@@ -75,4 +75,5 @@ Route::group(['prefix' => 'companyManager', 'middleware' => 'auth.companyManager
     CRUD::resource('/sensorcatalog', 'Admin\SensorCatalogCrudController');
     CRUD::resource('/sitetype', 'Admin\SiteTypeCrudController');
     CRUD::resource('/site', 'Admin\SiteCrudController');
+    CRUD::resource('/employee', 'Admin\EmployeeCrudController');
 });

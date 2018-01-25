@@ -64,6 +64,12 @@
                 </li>
             @endif
             @if(auth()->user()->isCompanyManager())
+                <li>
+                    <a href="{{  url('/companyManager/employee') }}">
+                        <i class="fa fa-user"></i> 
+                        <span>Impiegati</span>
+                    </a>
+                </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-building"></i>

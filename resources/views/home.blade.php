@@ -47,11 +47,52 @@
         background-color: #0289e2;
         border-color: #0289e2;
     }
+
+    /* Slider multi elementi di Bootstrap */
+    .multi-item-carousel .carousel-inner > .item {
+      -webkit-transition: 500ms ease-in-out left;
+      transition: 500ms ease-in-out left;
+    }
+    .multi-item-carousel .carousel-inner .active.left {
+        left: -33.3%;
+    }
+    .multi-item-carousel .carousel-inner .active.right {
+        left: 33.3%;
+    }
+    .multi-item-carousel .carousel-inner .next {
+        left: 33.3%;
+    }
+    .multi-item-carousel .carousel-inner .prev {
+        left: -33.3%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+        .multi-item-carousel .carousel-inner > .item {
+            -webkit-transition: 500ms ease-in-out left;
+            transition: 500ms ease-in-out left;
+            -webkit-transition: 500ms ease-in-out all;
+            transition: 500ms ease-in-out all;
+            -webkit-backface-visibility: visible;
+                backface-visibility: visible;
+            -webkit-transform: none!important;
+                transform: none!important;
+        }
+    }
+
+    .multi-item-carousel .carousel-control.left,
+    .multi-item-carousel .carousel-control.right {
+        background-image: none;
+    }
+
     .btn-xl .badge {
       color: #0289e2;
     }
 
-    .text-primary,a {
+    .text-primary,
+    a,
+    a:active,
+    a:focus,
+    a:hover
+     {
         color: #0289e2;
     }
 
@@ -93,38 +134,51 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-3">
-                    <span class="fa-stack fa-3x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted"></p>
+                <div id="carousel-home" class="carousel slide carousel-fade col-md-12" data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="/img/slider/gestione-siti.png" alt="gestione siti"> 
+                        <div class="carousel-caption">
+                            <h2>Gestione dei siti</h2>
+                        </div>
+                    </div>
+                     <div class="item">
+                        <img src="/img/slider/gestione-impiegati.png" alt="gestione impiegati"> 
+                        <div class="carousel-caption">
+                            <h2>Gestione degli impiegati</h2>
+                        </div>
+                    </div>
+                     <div class="item">
+                        <img src="/img/slider/gestione-sensori.png" alt="gestione sensori"> 
+                        <div class="carousel-caption">
+                            <h2>Gestione dei sensori</h2>
+                        </div>
+                    </div>
+                     <div class="item">
+                        <img src="/img/slider/grafici-sensori.png" alt="grafici sensori"> 
+                        <div class="carousel-caption">
+                            <h2>Visualizzazione dei grafici dei sensori</h2>
+                        </div>
+                    </div>
+                     <div class="item">
+                        <img src="/img/slider/gestione-messaggi.png" alt="gestione messaggi"> 
+                        <div class="carousel-caption">
+                            <h2>Gestione dei messaggi ricevuti dai sensori</h2>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <span class="fa-stack fa-3x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-dashboard fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Gestionali</h4>
-                    <p class="text-muted"></p>
-                </div>
-                <div class="col-md-3">
-                    <span class="fa-stack fa-3x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Design Responsive</h4>
-                    <p class="text-muted"></p>
-                </div>
-                <div class="col-md-3">
-                    <span class="fa-stack fa-3x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted"></p>
-                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-home" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-home" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
             </div>
         </div>
     </section>

@@ -22,7 +22,7 @@ class EmployeeCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Employee');
         $this->crud->setRoute('/companyManager/employee');
-        $this->crud->setEntityNameStrings('employee', 'employees');
+        $this->crud->setEntityNameStrings('impiegato', 'impiegati');
 
         /*
         |--------------------------------------------------------------------------

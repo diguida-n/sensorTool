@@ -143,8 +143,12 @@
                     </ul>
                 </li>
             @endif
+            <li>
 
-
+                @impersonating
+                    <a href="{{ route('impersonate.leave') }}"><i class="fa fa-eye-slash" aria-hidden="true"></i>&nbsp;Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
+                @endImpersonating
+            </li>
           <!-- ======================================= -->
           {{-- <li class="header">Other menus</li> --}}
         </ul>

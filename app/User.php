@@ -80,6 +80,6 @@ class User extends Authenticatable
     public function getImpersonateButton()
     {
         if(auth()->user()->id!=$this->id)
-            return "<a class='btn btn-xs btn-default' href='". route('impersonate', $this->id)  ."'><i class='fa fa-eye'></i>Impersonifica</a>";
+            return "<a class='btn btn-xs btn-default' href='". route('impersonate', $this->id)  ."'><i class='fa fa-eye'></i>&nbsp;Impersonifica</a>";
     }
 }

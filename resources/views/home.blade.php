@@ -3,7 +3,55 @@
 @section('title') Home @endsection
 
 @section('style')
+<style>
+    
+    .navbar-custom .navbar-brand {
+        color: #0289e2;
+    }
+    .navbar-custom .nav li a:focus,
+    .navbar-custom .nav li a:hover {
+        color: #0289e2;
+    }
 
+    header {
+        background-image: url(../img/header-wallpaper.jpg);
+    }
+    .btn-xl {
+        background-color: #0289e2;
+        border-color: #0289e2;
+    }
+    .btn-xl:hover,
+    .btn-xl:focus,
+    .btn-xl:active,
+    .btn-xl.active,
+    .open .dropdown-toggle.btn-xl {
+        background-color: #0289e2;
+        border-color: #0289e2;
+    }
+
+    .btn-xl.disabled,
+    .btn-xl[disabled],
+    fieldset[disabled] .btn-xl,
+    .btn-xl.disabled:hover,
+    .btn-xl[disabled]:hover,
+    fieldset[disabled] .btn-xl:hover,
+    .btn-xl.disabled:focus,
+    .btn-xl[disabled]:focus,
+    fieldset[disabled] .btn-xl:focus,
+    .btn-xl.disabled:active,
+    .btn-xl[disabled]:active,
+    fieldset[disabled] .btn-xl:active,
+    .btn-xl.disabled.active,
+    .btn-xl[disabled].active,
+    fieldset[disabled] .btn-xl.active {
+        background-color: #0289e2;
+        border-color: #0289e2;
+    }
+    .btn-xl .badge {
+      color: #0289e2;
+    }
+</style>
+    
 @endsection
 
 @section('content')

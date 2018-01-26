@@ -51,8 +51,21 @@
       color: #0289e2;
     }
 
-    .text-primary {
+    .text-primary,a {
         color: #0289e2;
+    }
+
+    section#contact {
+        background-color: #222;
+        background-image: url(../img/contact-section.jpg); 
+    }
+
+    
+    ul.social-buttons li a:active, 
+    ul.social-buttons li a:focus,
+    ul.social-buttons li a:hover{
+        background-color: #0289e2;
+        
     }
 </style>
     

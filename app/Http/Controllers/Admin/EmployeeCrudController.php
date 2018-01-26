@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeeRequest as StoreRequest;
 use App\Http\Requests\EmployeeRequest as UpdateRequest;
 use App\Mail\AddNewCompanyManager;
 use App\Models\Enterprise;
+use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Mail;
 
@@ -112,6 +113,13 @@ class EmployeeCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
+        $employeeIds = [];
+        $users = User::where('enterprise_id',auth()->user()->enterprise_id)->get();
+        foreach ($users as $u) {
+            if($u->hasRole('Employee'))
+                $employeeIds[]=$u->id;
+        }
+        $this->crud->addClause('whereIn','id',$employeeIds);
     }
 
     /**
@@ -122,7 +130,6 @@ class EmployeeCrudController extends CrudController
     public function index()
     {
         $this->crud->hasAccessOrFail('list');
-        $this->crud->addClause('where','enterprise_id',auth()->user()->enterprise_id);
         $this->data['crud'] = $this->crud;
         $this->data['title'] = ucfirst($this->crud->entity_name_plural);
         // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package

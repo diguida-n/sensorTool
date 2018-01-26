@@ -50,6 +50,10 @@
     .btn-xl .badge {
       color: #0289e2;
     }
+
+    .text-primary {
+        color: #0289e2;
+    }
 </style>
     
 @endsection

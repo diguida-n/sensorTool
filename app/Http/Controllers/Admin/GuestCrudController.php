@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\GuestRequest as StoreRequest;
+use App\Http\Requests\GuestRequest as UpdateRequest;
+use App\Mail\AddNewCompanyManager;
+use App\Mail\AddNewGuest;
+use App\Models\Enterprise;
+use App\Models\Site;
+use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Illuminate\Support\Facades\Mail;
 
-// VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\SensorCatalogRequest as StoreRequest;
-use App\Http\Requests\SensorCatalogRequest as UpdateRequest;
-
-class SensorCatalogCrudController extends CrudController
+class GuestCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +22,9 @@ class SensorCatalogCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\SensorCatalog');
-        $this->crud->setRoute('/admin/sensorcatalog');
-        $this->crud->setEntityNameStrings('Catalogo Sensori', 'Catalogo sensori');
+        $this->crud->setModel('App\Models\Guest');
+        $this->crud->setRoute('/companyManager/guest');
+        $this->crud->setEntityNameStrings('Guest', 'Guest');
 
         /*
         |--------------------------------------------------------------------------
@@ -28,88 +32,45 @@ class SensorCatalogCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        $this->crud->addField([
+            'name' => 'email',
+            'label' => 'Email Guest',
+            'type' => 'email'
+        ], 'create');
+
+        $sites = [];
+        $s = Site::where('enterprise_id',auth()->user()->enterprise_id)->get();
+        foreach ($s as $site)
+            $sites[$site->id]=$site->name;
+        $this->crud->addField([ // select_from_array
+        'name' => 'site',
+        'label' => "Sito",
+        'type' => 'select2_from_array',
+        'options' => $sites,
+        'allows_null' => false,
+        // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        ]);
+        
+        $this->crud->addColumn([
+           'name' => 'name',
+           'label' => "Nome"
+        ]);
+
+        $this->crud->addColumn([
+           'name' => 'email',
+           'label' => "Email"
+        ]);
+
+        $this->crud->removeColumns(['password', 'remember_token','enterprise_id']); // remove an array of columns from the stack
+        $this->crud->removeButton('update');
 
         // ------ CRUD FIELDS
-
-        $this->crud->addField([
-            'name' => 'name',
-            'label' => 'Nome',
-            'type' => 'text',
-        ], 'update/create/both');
-
-        $this->crud->addField([
-            'name' => 'description',
-            'label' => 'Descrizione',
-            'type' => 'ckeditor',
-        ], 'update/create/both');
-
-        $this->crud->addField([
-            'name' => 'min_detectable',
-            'label' => 'Minimo registrabile',
-            'type' => 'number',
-            'attributes' => ["step" => 0.01,"max"=>999999.99,"min"=>-999999.99], // allow decimals
-        ], 'update/create/both');
-        $this->crud->addField([
-            'name' => 'max_detectable',
-            'label' => 'Massimo registrabile',
-            'type' => 'number',
-            'attributes' => ["step" => 0.01,"max"=>999999.99,"min"=>-999999.99], // allow decimals
-        ], 'update/create/both');
-        $this->crud->addField([
-            'label' => "Tipo Sensore",
-            'type' => 'select2',
-            'name' => 'sensor_type_id', // the db column for the foreign key
-            'entity' => 'sensorType', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\SensorType", // foreign key model
-            "attributes"=>['required'=>true]
-        ], 'update/create/both');
-        $this->crud->addField([
-            'label' => "Brand sensore",
-            'type' => 'select2',
-            'name' => 'brand_id', // the db column for the foreign key
-            'entity' => 'brand', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\Brand", // foreign key model
-            "attributes"=>['required'=>true]
-        ], 'update/create/both');
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
-        $this->crud->addColumn([
-           'name' => 'name',
-           'label' => "Nome"
-        ]);
-        $this->crud->addColumn([
-           'name' => 'description',
-           'label' => "Descrizione"
-        ]);
-        $this->crud->addColumn([
-            'name' => 'min_detectable',
-            'label' => 'Minimo registrabile',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'max_detectable',
-            'label' => 'Massimo registrabile',
-        ]);
-        $this->crud->removeColumn('sensor_type_id'); // remove a column from the stack
-
-        $this->crud->addColumn([
-            'name' => 'brand_id',
-            'label' => 'Brand Sensore',
-            'type' => "model_function",
-            'function_name' => 'getBrandName',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'sensor_type_id',
-            'label' => 'Tipo Sensore',
-            'type' => "model_function",
-            'function_name' => 'getSensorTypeName',
-        ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
@@ -170,15 +131,23 @@ class SensorCatalogCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
+        $guestIds = [];
+        $users = User::all();
+        foreach ($users as $u) {
+            if($u->hasRole('Guest') && ($u->site && $u->site->enterprise_id == auth()->user()->enterprise_id))
+                $guestIds[]=$u->id;
+        }
+        $this->crud->addClause('whereIn','id',$guestIds);
     }
 
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $site = Site::find($request->site);
+        Mail::to($request->email)->send(new AddNewGuest($site,'Guest'));
+
+        \Alert::success(trans('backpack::crud.insert_success'))->flash();
+        return $this->getRedirectRoute($site);
     }
 
     public function update(UpdateRequest $request)
@@ -188,5 +157,23 @@ class SensorCatalogCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    private function getRedirectRoute($itemId = null)
+    {
+        $saveAction = \Request::input('save_action', config('backpack.crud.default_save_action', 'save_and_back'));
+        $itemId = $itemId ? $itemId : \Request::input('id');
+
+        switch ($saveAction) {
+            case 'save_and_new':
+                $redirectUrl = url('/companyManager/employee/create');
+                break;
+            case 'save_and_edit':
+            case 'save_and_back':
+            default:
+                $redirectUrl = $this->crud->route;
+                break;
+        }
+        return \Redirect::to($redirectUrl);
     }
 }

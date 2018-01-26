@@ -122,20 +122,6 @@ class EmployeeCrudController extends CrudController
         $this->crud->addClause('whereIn','id',$employeeIds);
     }
 
-    /**
-     * Display all rows in the database for this entity.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $this->crud->hasAccessOrFail('list');
-        $this->data['crud'] = $this->crud;
-        $this->data['title'] = ucfirst($this->crud->entity_name_plural);
-        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
-        return view($this->crud->getListView(), $this->data);
-    }
-
     public function store(StoreRequest $request)
     {
         // your additional operations before save here

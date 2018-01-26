@@ -55,24 +55,26 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()
         Route::get('/user/add-company-manager/{enterprise}/','Admin\EnterpriseCrudController@addCompanyManager')->name('admin.enterprise.addCompanyManager');
         Route::post('/user/store-company-manager/{enterprise}/','Admin\EnterpriseCrudController@storeCompanyManager')->name('admin.enterprise.storeCompanyManager');
     });
-Route::group([
-            // 'namespace'  => 'Backpack\PermissionManager\app\Http\Controllers',
-    ], function () {
-        CRUD::resource('/permission', 'Admin\PermissionCrudControllerCustom');
-        CRUD::resource('/role', 'Admin\RoleCrudControllerCustom');
-        CRUD::resource('/user', 'Admin\UserCrudControllerCustom');
+
+    Route::group([
+                // 'namespace'  => 'Backpack\PermissionManager\app\Http\Controllers',
+        ], function () {
+            CRUD::resource('/permission', 'Admin\PermissionCrudControllerCustom');
+            CRUD::resource('/role', 'Admin\RoleCrudControllerCustom');
+            CRUD::resource('/user', 'Admin\UserCrudControllerCustom');
+        });
+      
+        CRUD::resource('/brand', 'Admin\BrandCrudController');
+    CRUD::resource('/sensortype', 'Admin\SensorTypeCrudController');
+    CRUD::resource('/sensorcatalog', 'Admin\SensorCatalogCrudController');
+      
     });
-  
-  // [...] other routes
-});
 
 Route::group(['prefix' => 'companyManager', 'middleware' => 'auth.companyManager'], function()
 {
-    CRUD::resource('/brand', 'Admin\BrandCrudController');
     CRUD::resource('/sensor', 'Admin\SensorCrudController');
-    CRUD::resource('/sensortype', 'Admin\SensorTypeCrudController');
-    CRUD::resource('/sensorcatalog', 'Admin\SensorCatalogCrudController');
     CRUD::resource('/sitetype', 'Admin\SiteTypeCrudController');
     CRUD::resource('/site', 'Admin\SiteCrudController');
     CRUD::resource('/employee', 'Admin\EmployeeCrudController');
+    CRUD::resource('/guest', 'Admin\GuestCrudController');
 });

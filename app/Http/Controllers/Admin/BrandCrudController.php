@@ -19,7 +19,7 @@ class BrandCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Brand');
-        $this->crud->setRoute('/companyManager/brand');
+        $this->crud->setRoute('/admin/brand');
         $this->crud->setEntityNameStrings('Brand', 'Brand');
 
         /*

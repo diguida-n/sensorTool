@@ -98,57 +98,57 @@
                     </ul>
                 </li>
             @endif
-            @if(auth()->user()->isCompanyManager() || auth()->user()->isEmployee() || auth()->user()->isGuest())
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-podcast"></i>
-                        <span>Sensori</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        @if(auth()->user()->isCompanyManager())
-                            <li>
-                                <a href="{{ url('/companyManager/sensor') }}">
-                                    <i class="fa fa-podcast"></i>
-                                    <span>Sensori</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/companyManager/sensorcatalog') }}">
-                                    <i class="fa fa-files-o"></i>
-                                    <span>Cataloghi</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/companyManager/sensortype') }}">
-                                    <i class="fa fa-thermometer-3"></i>
-                                    <span>Tipi di Sensori</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/companyManager/brand') }}">
-                                    <i class="fa fa-feed"></i>
-                                    <span>Brand sensori</span>
-                                </a>
-                            </li>
-                        @endif
-                        @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
-                            <li>
-                                <a href="{{ url('/employee/message') }}">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span>Messaggi</span>
-                                </a>
-                            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-podcast"></i>
+                    <span>Sensori</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    @if(auth()->user()->isAdmin())
                         <li>
-                            <a href="{{ url('/employee/detection') }}">
-                                <i class="fa fa-hdd-o"></i>
-                                <span>Dati</span>
+                            <a href="{{ url('/admin/sensorcatalog') }}">
+                                <i class="fa fa-files-o"></i>
+                                <span>Cataloghi</span>
                             </a>
                         </li>
-                        @endif
-                    </ul>
-                </li>
-            @endif
+                        <li>
+                            <a href="{{ url('/admin/sensortype') }}">
+                                <i class="fa fa-thermometer-3"></i>
+                                <span>Tipi di Sensori</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/admin/brand') }}">
+                                <i class="fa fa-feed"></i>
+                                <span>Brand sensori</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth()->user()->isCompanyManager())
+                        <li>
+                            <a href="{{ url('/companyManager/sensor') }}">
+                                <i class="fa fa-podcast"></i>
+                                <span>Sensori</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
+                        <li>
+                            <a href="{{ url('/employee/message') }}">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Messaggi</span>
+                            </a>
+                        </li>
+                    <li>
+                        <a href="{{ url('/employee/detection') }}">
+                            <i class="fa fa-hdd-o"></i>
+                            <span>Dati</span>
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
             <li>
                 @impersonating
                     <a href="{{ route('impersonate.leave') }}"><i class="fa fa-eye-slash" aria-hidden="true"></i>&nbsp;Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>

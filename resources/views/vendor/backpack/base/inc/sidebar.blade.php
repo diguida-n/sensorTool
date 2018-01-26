@@ -70,6 +70,12 @@
                         <span>Impiegati</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{  url('/companyManager/guest') }}">
+                        <i class="fa fa-user"></i> 
+                        <span>Utenti Guest</span>
+                    </a>
+                </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-building"></i>
@@ -144,7 +150,6 @@
                 </li>
             @endif
             <li>
-
                 @impersonating
                     <a href="{{ route('impersonate.leave') }}"><i class="fa fa-eye-slash" aria-hidden="true"></i>&nbsp;Ritorna {{ App\User::find(session()->get('impersonated_by'))->name }}</a>
                 @endImpersonating

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\EmployeeRequest as StoreRequest;
-use App\Http\Requests\EmployeeRequest as UpdateRequest;
+use App\Http\Requests\GuestRequest as StoreRequest;
+use App\Http\Requests\GuestRequest as UpdateRequest;
 use App\Mail\AddNewCompanyManager;
+use App\Mail\AddNewGuest;
 use App\Models\Enterprise;
+use App\Models\Site;
 use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Mail;
 
-class EmployeeCrudController extends CrudController
+class GuestCrudController extends CrudController
 {
     public function setup()
     {
@@ -20,9 +22,9 @@ class EmployeeCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Employee');
-        $this->crud->setRoute('/companyManager/employee');
-        $this->crud->setEntityNameStrings('employee', 'employees');
+        $this->crud->setModel('App\Models\Guest');
+        $this->crud->setRoute('/companyManager/guest');
+        $this->crud->setEntityNameStrings('Guest', 'Guest');
 
         /*
         |--------------------------------------------------------------------------
@@ -30,20 +32,25 @@ class EmployeeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // $this->crud->setFromDb();
-
-        // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'email',
-            'label' => 'Email Impiegato',
+            'label' => 'Email Guest',
             'type' => 'email'
         ], 'create');
-        // $this->crud->addField($options, 'update/create/both');
-        // $this->crud->addFields($array_of_arrays, 'update/create/both');
-        // $this->crud->removeField('name', 'update/create/both');
-        // $this->crud->removeFields($array_of_names, 'update/create/both');
 
-        // ------ CRUD COLUMNS
+        $sites = [];
+        $s = Site::where('enterprise_id',auth()->user()->enterprise_id)->get();
+        foreach ($s as $site)
+            $sites[$site->id]=$site->name;
+        $this->crud->addField([ // select_from_array
+        'name' => 'site',
+        'label' => "Sito",
+        'type' => 'select2_from_array',
+        'options' => $sites,
+        'allows_null' => false,
+        // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        ]);
+        
         $this->crud->addColumn([
            'name' => 'name',
            'label' => "Nome"
@@ -53,10 +60,21 @@ class EmployeeCrudController extends CrudController
            'name' => 'email',
            'label' => "Email"
         ]);
+
+        $this->crud->removeColumns(['password', 'remember_token','enterprise_id']); // remove an array of columns from the stack
+        $this->crud->removeButton('update');
+
+        // ------ CRUD FIELDS
+        // $this->crud->addField($options, 'update/create/both');
+        // $this->crud->addFields($array_of_arrays, 'update/create/both');
+        // $this->crud->removeField('name', 'update/create/both');
+        // $this->crud->removeFields($array_of_names, 'update/create/both');
+
+        // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
-        $this->crud->removeColumns(['password', 'remember_token','enterprise_id']); // remove an array of columns from the stack
+        // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);
 
@@ -65,7 +83,7 @@ class EmployeeCrudController extends CrudController
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
         // $this->crud->addButtonFromModelFunction($stack, $name, $model_function_name, $position); // add a button whose HTML is returned by a method in the CRUD model
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
-        $this->crud->removeButton('update');
+        // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
         // $this->crud->removeAllButtons();
         // $this->crud->removeAllButtonsFromStack('line');
@@ -113,24 +131,23 @@ class EmployeeCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
-        $employeeIds = [];
-        $users = User::where('enterprise_id',auth()->user()->enterprise_id)->get();
+        $guestIds = [];
+        $users = User::all();
         foreach ($users as $u) {
-            if($u->hasRole('Employee'))
-                $employeeIds[]=$u->id;
+            if($u->hasRole('Guest') && ($u->site && $u->site->enterprise_id == auth()->user()->enterprise_id))
+                $guestIds[]=$u->id;
         }
-        $this->crud->addClause('whereIn','id',$employeeIds);
+        $this->crud->addClause('whereIn','id',$guestIds);
     }
 
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        $enterprise = Enterprise::find(auth()->user()->enterprise_id)->first();
-        Mail::to($request->email)->send(new AddNewCompanyManager($enterprise,'Employee'));
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
+        $site = Site::find($request->site);
+        Mail::to($request->email)->send(new AddNewGuest($site,'Guest'));
+
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
-        return $this->getRedirectRoute($enterprise);
+        return $this->getRedirectRoute($site);
     }
 
     public function update(UpdateRequest $request)

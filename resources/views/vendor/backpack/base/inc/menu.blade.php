@@ -22,7 +22,7 @@
         @if (Auth::guest())
             <li><a href="{{ route('backpack.auth.login') }}">{{ trans('backpack::base.login') }}</a></li>
             @if (config('backpack.base.registration_open'))
-            <li><a href="{{ route('backpack.auth.register') }}">{{ trans('backpack::base.register') }}</a></li>
+            {{-- <li><a href="{{ route('backpack.auth.register') }}">{{ trans('backpack::base.register') }}</a></li> --}}
             @endif
         @else
             <li><a href="{{ route('backpack.auth.logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('backpack::base.logout') }}</a></li>

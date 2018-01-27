@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\EmployeeRequest as StoreRequest;
 use App\Http\Requests\EmployeeRequest as UpdateRequest;
-use App\Mail\AddNewCompanyManager;
+use App\Mail\AddNewUser;
 use App\Models\Enterprise;
 use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -126,7 +126,7 @@ class EmployeeCrudController extends CrudController
     {
         // your additional operations before save here
         $enterprise = Enterprise::find(auth()->user()->enterprise_id)->first();
-        Mail::to($request->email)->send(new AddNewCompanyManager($enterprise,'Employee'));
+        Mail::to($request->email)->send(new AddNewUser($enterprise,'Employee',$request->email));
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         \Alert::success(trans('backpack::crud.insert_success'))->flash();

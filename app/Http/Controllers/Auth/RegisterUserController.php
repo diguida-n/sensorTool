@@ -133,13 +133,24 @@ class RegisterUserController extends BackpackRegisterController
     public function showRegistrationForm($cryptedData = null)
     {
         // if registration is closed, deny access
-        if (!config('backpack.base.registration_open')) {
+        if (!config('backpack.base.registration_open') || is_null($cryptedData)) {
             abort(403, trans('backpack::base.registration_closed'));
         }
 
         $this->data['title'] = trans('backpack::base.register'); // set the page title
 
         $this->data['cryptedData'] = $cryptedData;
+        $data['email'] = null;
+        try {
+            $decrypted = Crypt::decryptString($cryptedData);
+            $decrypted = json_decode($decrypted,true);
+            $this->data['email'] = $decrypted['email'];
+
+        } catch (DecryptException $e) {
+            abort(403, trans('backpack::base.registration_closed'));
+        }
+        
+        
         return view('backpack::auth.register', $this->data);
     }
 

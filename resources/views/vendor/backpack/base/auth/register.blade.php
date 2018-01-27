@@ -34,7 +34,12 @@
                             <label class="col-md-4 control-label">{{ trans('backpack::base.email_address') }}</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+                                @if(is_null($email))
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                @else
+                                    <input type="email" class="form-control" name="email" value="{{ old('email',$email) }}" readonly>
+                                @endif
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -72,7 +77,7 @@
                             </div>
                         </div>
                         @if( !is_null($cryptedData))
-                            <input type="text"  name="cryptedData" value="{!!$cryptedData!!}" >
+                            <input type="hidden"  name="cryptedData" value="{!!$cryptedData!!}" >
                         @endif
 
                         <div class="form-group">

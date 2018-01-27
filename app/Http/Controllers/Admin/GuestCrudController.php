@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\GuestRequest as StoreRequest;
 use App\Http\Requests\GuestRequest as UpdateRequest;
-use App\Mail\AddNewCompanyManager;
 use App\Mail\AddNewGuest;
 use App\Models\Enterprise;
 use App\Models\Site;
@@ -144,7 +143,7 @@ class GuestCrudController extends CrudController
     {
         // your additional operations before save here
         $site = Site::find($request->site);
-        Mail::to($request->email)->send(new AddNewGuest($site,'Guest'));
+        Mail::to($request->email)->send(new AddNewGuest($site,'Guest',$request->email));
 
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
         return $this->getRedirectRoute($site);

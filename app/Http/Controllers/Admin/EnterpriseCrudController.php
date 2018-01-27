@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\EnterpriseRequest as StoreRequest;
 use App\Http\Requests\EnterpriseRequest as UpdateRequest;
-use App\Mail\AddNewCompanyManager;
+use App\Mail\AddNewUser;
 use App\Models\Enterprise;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
@@ -118,7 +118,7 @@ class EnterpriseCrudController extends CrudController
     {
         $this->validate($request,['email'=> 'required|email']);
         $enterprise = Enterprise::find($enterprise)->first();
-        Mail::to($request->email)->send(new AddNewCompanyManager($enterprise,'Company Manager'));
+        Mail::to($request->email)->send(new AddNewUser($enterprise,'Company Manager',$request->email));
         
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
         return $this->getRedirectRoute($enterprise);

@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
-class AddNewCompanyManager extends Mailable
+class AddNewUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,20 +18,23 @@ class AddNewCompanyManager extends Mailable
     protected $url;
     protected $cryptedData;
     protected $role;
+    protected $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Enterprise $enterprise,$role)
+    public function __construct(Enterprise $enterprise,$role,$email)
     {
         $this->enterprise = $enterprise;
         $this->role = $role;
         $cryptedData = [];
+        $this->email = $email;
 
         $cryptedData['role'] = $role;
         $cryptedData['enterprise_id'] = $enterprise->id;
         $cryptedData['expiring_date'] = Carbon::now('Europe/Rome')->addDay()->toDateTimeString();
+        $cryptedData['email'] = $this->email;
         $this->cryptedData = Crypt::encryptString(json_encode($cryptedData));
 
         $this->url = route('registerUser',$this->cryptedData);

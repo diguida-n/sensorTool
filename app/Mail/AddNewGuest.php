@@ -18,20 +18,23 @@ class AddNewGuest extends Mailable
     protected $url;
     protected $cryptedData;
     protected $role;
+    protected $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Site $site,$role)
+    public function __construct(Site $site,$role,$email)
     {
         $this->site = $site;
         $this->role = $role;
+        $this->email = $email;
         $cryptedData = [];
 
         $cryptedData['role'] = $role;
         $cryptedData['site_id'] = $site->id;
         $cryptedData['expiring_date'] = Carbon::now('Europe/Rome')->addDay()->toDateTimeString();
+        $cryptedData['email'] = $this->email;
         $this->cryptedData = Crypt::encryptString(json_encode($cryptedData));
 
         $this->url = route('registerUser',$this->cryptedData);

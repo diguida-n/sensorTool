@@ -14,6 +14,9 @@
         display: table;
         font-weight: 100;
         font-family: 'Lato';
+        background-image: url(../img/contact-section.jpg);
+        background-color: #cccccc;
+        background-repeat: no-repeat;
       }
 
       .container {
@@ -29,13 +32,25 @@
 
       .title {
         font-size: 156px;
+        font-weight: 500;
+        color:white;
       }
 
       .quote {
         font-size: 36px;
+        font-weight: 1000;
+        color:white;
       }
 
       .explanation {
+        font-size: 24px;
+        font-weight: 2000;
+        color:white;
+      }
+
+      small,a {
+        color:white;
+        font-weight:bold;
         font-size: 24px;
       }
     </style>

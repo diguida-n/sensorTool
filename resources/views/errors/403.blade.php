@@ -14,6 +14,9 @@
         display: table;
         font-weight: 100;
         font-family: 'Lato';
+        background-image: url(../img/contact-section.jpg);
+        background-color: #cccccc;
+        background-repeat: no-repeat;
       }
 
       .container {
@@ -29,14 +32,20 @@
 
       .title {
         font-size: 156px;
+        font-weight: 500;
+        color:white;
       }
 
       .quote {
         font-size: 36px;
+        font-weight: 1000;
+        color:white;
       }
 
       .explanation {
         font-size: 24px;
+        font-weight: 2000;
+        color:white;
       }
     </style>
   </head>
@@ -47,12 +56,12 @@
         <div class="quote">Forbidden.</div>
         <div class="explanation">
           <br>
-          <small>
+          <strong>
             <?php
               $default_error_message = "Please return to <a href='".url('')."'>our homepage</a>.";
             ?>
             {!! isset($exception)? ($exception->getMessage()?$exception->getMessage():$default_error_message): $default_error_message !!}
-         </small>
+         </strong>
        </div>
       </div>
     </div>

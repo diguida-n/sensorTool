@@ -16,6 +16,15 @@ Auth::routes();
 
 Route::impersonate();
 
+Route::get('/register', function ()
+{
+    abort(403, trans('backpack::base.registration_closed'));
+});
+
+Route::get('/login', function ()
+{
+    abort(403, trans('backpack::base.registration_closed'));
+});
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/admin/register','Auth\RegisterUserController@showRegistrationForm')->name('backpack.auth.register');
 

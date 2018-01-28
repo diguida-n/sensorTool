@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Home @endsection
+@section('title') SensorTool @endsection
 
 @section('style')
 <style>

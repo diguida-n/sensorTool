@@ -35,6 +35,15 @@
             color: #fed136;
             background-color: #222;
         }
+
+        .navbar-custom .navbar-toggle {
+            background-color: #0289e2;
+            border-color: #0289e2;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: white;
+        }
     </style>
     @yield('style')
 </head>

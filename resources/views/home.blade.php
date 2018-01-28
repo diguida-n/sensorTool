@@ -139,31 +139,31 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <img src="/img/slider/gestione-siti.png" alt="gestione siti"> 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-xs">
                             <h2>Gestione dei siti</h2>
                         </div>
                     </div>
                      <div class="item">
                         <img src="/img/slider/gestione-impiegati.png" alt="gestione impiegati"> 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-xs">
                             <h2>Gestione degli impiegati</h2>
                         </div>
                     </div>
                      <div class="item">
                         <img src="/img/slider/gestione-sensori.png" alt="gestione sensori"> 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-xs">
                             <h2>Gestione dei sensori</h2>
                         </div>
                     </div>
                      <div class="item">
                         <img src="/img/slider/grafici-sensori.png" alt="grafici sensori"> 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-xs">
                             <h2>Visualizzazione dei grafici dei sensori</h2>
                         </div>
                     </div>
                      <div class="item">
                         <img src="/img/slider/gestione-messaggi.png" alt="gestione messaggi"> 
-                        <div class="carousel-caption">
+                        <div class="carousel-caption hidden-xs">
                             <h2>Gestione dei messaggi ricevuti dai sensori</h2>
                         </div>
                     </div>
@@ -276,87 +276,6 @@
                         <h4>Dreams</h4>
                         <p class="text-muted">Website Design</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="bg-light-gray" style="display: none;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About Us</h2>
-                    <h3 class="section-subheading text-muted">Dagli albori ad oggi, ecco chi siamo.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -501,10 +420,10 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
+                        {{-- <li><a href="#">Privacy Policy</a>
                         </li>
                         <li><a href="#">Terms of Use</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

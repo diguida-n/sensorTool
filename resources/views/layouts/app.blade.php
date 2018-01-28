@@ -35,7 +35,11 @@
             color: #fed136;
             background-color: #222;
         }
-
+        
+        .navbar-custom .navbar-toggle:focus,
+        .navbar-custom .navbar-toggle:hover {
+            background-color: #0289e2;
+        }
         .navbar-custom .navbar-toggle {
             background-color: #0289e2;
             border-color: #0289e2;

@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand page-scroll" href="#page-top">
-                <img src="/img/logo.png" alt="" class="" height="75px">
+                <img src="/img/logo.png" alt="logo sensorTool" class="" style="height: 2.5em">
             </a>
         </div>
 

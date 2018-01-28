@@ -24,7 +24,12 @@ class DemoSeeder extends Seeder
     	DB::table('sites')->truncate();
     	DB::table('site_types')->truncate();
     	DB::table('enterprises')->truncate();
-
+    	if(!App\User::where('email',"admin@sensortool.com")->first())
+	    	App\User::create([
+	            'name' => "Admin",
+	            'email' => "admin@sensortool.com",
+	            'password' => bcrypt("admin"),
+	        ]);
     	DB::table('enterprises')->insert(
     		[
     		'id'=>1,

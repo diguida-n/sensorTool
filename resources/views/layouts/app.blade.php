@@ -29,7 +29,7 @@
             background-color: transparent !important;
         }
         .navbar-custom .nav li a{
-            color: #555;
+            color: #ffffff;
         }
         .navbar-custom .nav li a:focus, .navbar-custom .nav li a:hover{
             color: #fed136;

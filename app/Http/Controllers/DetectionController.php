@@ -69,17 +69,17 @@ class DetectionController extends Controller
     public function transmitSensorData(Request $request)
     {
         $data = $request->all();
-        if(!$data['email'] && !$data['password'])
-            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Credentials not Valid"]);
+        if(!isset($data['email']) || !$data['email'] || !isset($data['password']) || !$data['password'])
+            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Credentials not Valid"])->setStatusCode(401);
         $user = Auth::attempt([
                                 "email"=>$data['email'],
                                 "password"=>$data['password']
                 ]);
         if(!$user)
-            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Credentials not Valid"]);
+            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Credentials not Valid"])->setStatusCode(401);
         $user = auth()->user();
         if(!$user->site)
-            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Not Authorized"]);
+            return response()->json(["code"=>401,"message"=>"Unauthorized Error","description"=>"Not Authorized"])->setStatusCode(401);
         $site = $user->site;
         $sensors = $site->sensors;
         $sensorsJson=[];

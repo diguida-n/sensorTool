@@ -20,7 +20,7 @@ class MessageCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Message');
         $this->crud->setRoute('/employee/message');
-        $this->crud->setEntityNameStrings('Messaggio', 'Tipi di messaggio');
+        $this->crud->setEntityNameStrings('Messaggio', 'Messaggi');
 
         /*
         |--------------------------------------------------------------------------

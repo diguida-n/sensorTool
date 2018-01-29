@@ -104,7 +104,7 @@ class SiteCrudController extends CrudController
 
         $this->crud->removeColumns(['enterprise_id']); // remove an array of columns from the stack
         $this->crud->addButtonFromModelFunction("line",'addNewSensor','getAddNewSensor','end');
-
+        $this->crud->enableExportButtons();
         
     }
 

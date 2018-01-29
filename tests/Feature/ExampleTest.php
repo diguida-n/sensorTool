@@ -7,6 +7,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
+    use DatabaseMigrations;
+
+    // public function setUp()
+    // {
+    //     parent::setUp();
+
+    //     $this->signIn();
+    // }
+    
     /**
      * A basic test example.
      *

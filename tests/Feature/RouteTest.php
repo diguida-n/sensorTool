@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tests\TestCase;
 
@@ -35,15 +34,4 @@ class RouteTest extends TestCase
        
     }
 
-
-    /** @test */
-    public function test_admin_dashboard_blocked()
-    {
-        try {
-            $response = $this->get('/admin/dashboard');
-        } catch (HttpException $e) {
-            $this->assertTrue($e->getStatusCode()==403);
-        }
-       
-    }
 }

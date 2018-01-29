@@ -17,15 +17,11 @@ class ExampleTest extends TestCase
     //     $this->signIn();
     // }
     
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    /** test */
+    public function guest_may_not_register()
     {
-        $response = $this->get('/');
+        $response = $this->get('/register');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 }

@@ -260,6 +260,19 @@
                                                     "type": "column",
                                                     "valueField": "value"
                                                 }],
+                                                "chartScrollbar": {
+                                                    "graph": "g1",
+                                                    "scrollbarHeight": 80,
+                                                    "backgroundAlpha": 0,
+                                                    "selectedBackgroundAlpha": 0.1,
+                                                    "selectedBackgroundColor": "#888888",
+                                                    "graphFillAlpha": 0,
+                                                    "graphLineAlpha": 0.5,
+                                                    "selectedGraphFillAlpha": 0,
+                                                    "selectedGraphLineAlpha": 1,
+                                                    "autoGridCount": false,
+                                                    "color": "#AAAAAA"
+                                                },
                                                 "marginTop": 0,
                                                 "marginRight": 0,
                                                 "marginLeft": 0,

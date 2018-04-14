@@ -101,6 +101,7 @@ class UserCrudControllerCustom extends UserCrudController
             ],
         ]); 
         $this->crud->addButtonFromModelFunction("line",'impersonateButton','getImpersonateButton','end');
+        $this->crud->enableExportButtons();
     }
 
    

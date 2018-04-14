@@ -50,10 +50,7 @@ class EnterpriseCrudController extends CrudController
             "name" => "vatNumber",
             "label" => "Partita Iva",
         ]);
-        // $this->crud->addField($options, 'update/create/both');
-        // $this->crud->addFields($array_of_arrays, 'update/create/both');
-        // $this->crud->removeField('name', 'update/create/both');
-        // $this->crud->removeFields($array_of_names, 'update/create/both');
+        
 
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
@@ -75,7 +72,7 @@ class EnterpriseCrudController extends CrudController
 
         // ------ CRUD BUTTONS
         $this->crud->addButtonFromModelFunction("line",'addNewCompanyManager','getAddNewCompanyManager','end');
-        
+        $this->crud->enableExportButtons();
     }
 
     public function store(StoreRequest $request)

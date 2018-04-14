@@ -620,5 +620,5 @@
     <script src="/js/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="/js/agency.min.js"></script>
+    <script src="/js/agency.js"></script>
 @endsection

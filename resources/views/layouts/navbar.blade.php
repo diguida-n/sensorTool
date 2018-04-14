@@ -26,14 +26,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="text-center"><a href="{{ url('admin/login') }}">Login</a></li>
+                    <li class="text-center"><a href="{{ url('admin/login') }}">Login</a> </li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true" aria-haspopup="true">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <ul class="dropdown-menu" style="background: #222;border:0;">
+                        <ul class="dropdown-menu" style="background: #222;border:0;" role="menu">
                             <li class="text-center">
                                 <a href="{{url('/admin')}}">
                                     Area riservata

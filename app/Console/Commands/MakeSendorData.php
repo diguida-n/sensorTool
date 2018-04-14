@@ -39,7 +39,7 @@ class MakeSendorData extends Command
     public function handle()
     {
 
-        for ($i=0; $i < 100; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             $s = \App\Models\Sensor::find(rand(1,11));
             $sensorType= $s->sensorCatalog->getSensorTypeName();
             $malfunction=false;

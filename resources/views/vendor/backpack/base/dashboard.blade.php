@@ -60,49 +60,48 @@
 
 @section('content')
 
-    <div class="row">
-        <ul class="nav nav-tabs">
-            @if(auth()->user()->enterprise && !auth()->user()->isGuest())
+    <ul class="nav nav-tabs">
+        @if(auth()->user()->enterprise && !auth()->user()->isGuest())
+            @foreach(auth()->user()->enterprise->sites as $index=>$site)
+              <li class="{{$index==0?'active':''}}">
+                <a data-toggle="tab" href="#site{{$site->id}}">{{$site->name}}</a>
+              </li>
+            @endforeach
+            
+            <div class="tab-content">
                 @foreach(auth()->user()->enterprise->sites as $index=>$site)
-                  <li class="{{$index==0?'active':''}}">
-                    <a data-toggle="tab" href="#site{{$site->id}}">{{$site->name}}</a>
-                  </li>
-                @endforeach
-                <div class="tab-content">
-                    @foreach(auth()->user()->enterprise->sites as $index=>$site)
-                        <div id="site{{$site->id}}" class="tab-pane fade {{$index==0?'in active':''}}">
-                            @foreach($site->sensors as $sensor)
-                                <div class="col-md-12">
-                                    <h4>{{$sensor->getSensorName()}}-{{$sensor->getSensorType()->name}}-({{$sensor->getSensorBrand()->name}})</h4>
-                                    <div id="chartdiv{{$sensor->id}}">
-                                        
-                                    </div>
+                    <div id="site{{$site->id}}" class="tab-pane fade {{$index==0?'in active':''}}">
+                        @foreach($site->sensors as $sensor)
+                            <div class="col-md-12">
+                                <h4>{{$sensor->getSensorName()}}-{{$sensor->getSensorType()->name}}-({{$sensor->getSensorBrand()->name}})</h4>
+                                <div id="chartdiv{{$sensor->id}}">
+                                    
                                 </div>
-                            @endforeach
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                @if(auth()->user()->site && auth()->user()->hasRole('Guest'))
-                      <li class="active">
-                        <a data-toggle="tab" href="#site{{auth()->user()->site->id}}">{{auth()->user()->site->name}}</a>
-                      </li>
-                    <div class="tab-content">
-                        <div id="site{{auth()->user()->site->id}}" class="tab-pane fade in active">
-                            @foreach(auth()->user()->site->sensors as $sensor)
-                                <div class="col-md-12">
-                                    <h4>{{$sensor->getSensorName()}}-{{$sensor->getSensorType()->name}}-({{$sensor->getSensorBrand()->name}})</h4>
-                                    <div id="chartdiv{{$sensor->id}}">
-                                        
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endif
+                @endforeach
+            </div>
+        @else
+            @if(auth()->user()->site && auth()->user()->hasRole('Guest'))
+                  <li class="active">
+                    <a data-toggle="tab" href="#site{{auth()->user()->site->id}}">{{auth()->user()->site->name}}</a>
+                  </li>
+                <div class="tab-content">
+                    <div id="site{{auth()->user()->site->id}}" class="tab-pane fade in active">
+                        @foreach(auth()->user()->site->sensors as $sensor)
+                            <div class="col-md-12">
+                                <h4>{{$sensor->getSensorName()}}-{{$sensor->getSensorType()->name}}-({{$sensor->getSensorBrand()->name}})</h4>
+                                <div id="chartdiv{{$sensor->id}}">
+                                    
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             @endif
-        </ul>
-    </div>
+        @endif
+    </ul>
 @endsection
 
 @section('after_scripts')
@@ -261,6 +260,19 @@
                                                     "type": "column",
                                                     "valueField": "value"
                                                 }],
+                                                "chartScrollbar": {
+                                                    "graph": "g1",
+                                                    "scrollbarHeight": 80,
+                                                    "backgroundAlpha": 0,
+                                                    "selectedBackgroundAlpha": 0.1,
+                                                    "selectedBackgroundColor": "#888888",
+                                                    "graphFillAlpha": 0,
+                                                    "graphLineAlpha": 0.5,
+                                                    "selectedGraphFillAlpha": 0,
+                                                    "selectedGraphLineAlpha": 1,
+                                                    "autoGridCount": false,
+                                                    "color": "#AAAAAA"
+                                                },
                                                 "marginTop": 0,
                                                 "marginRight": 0,
                                                 "marginLeft": 0,

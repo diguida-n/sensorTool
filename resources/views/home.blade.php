@@ -204,7 +204,7 @@
                     </a>
                     <div class="portfolio-caption">
                         <h4>Round Icons</h4>
-                        <p class="text-muted">Graphic Design</p>
+                        <p class="text-muted">Web Design</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">

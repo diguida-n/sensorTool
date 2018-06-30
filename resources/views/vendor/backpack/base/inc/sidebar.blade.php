@@ -12,9 +12,9 @@
                 <!-- ================================================ -->
                 <!-- ==== Recommended place for admin menu items ==== -->
                 <!-- ================================================ -->
-            @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
+            @if(auth()->user()->isCustomer() || auth()->user()->isGuest())
             <li>
-                <a href="{{ url('employee/dashboard') }}">
+                <a href="{{ url('customer/dashboard') }}">
                     <i class="fa fa-dashboard"></i> 
                     <span>{{ trans('backpack::base.dashboard') }}</span>
                 </a>
@@ -62,18 +62,10 @@
                         <span>Imprese</span>
                     </a>
                 </li>
-            @endif
-            @if(auth()->user()->isCompanyManager())
                 <li>
-                    <a href="{{  url('/companyManager/employee') }}">
+                    <a href="{{  backpack_url('customer') }}">
                         <i class="fa fa-user"></i> 
-                        <span>Impiegati</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{  url('/companyManager/guest') }}">
-                        <i class="fa fa-user"></i> 
-                        <span>Utenti Guest</span>
+                        <span>Clienti</span>
                     </a>
                 </li>
                 <li class="treeview">
@@ -84,13 +76,13 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="{{ url('/companyManager/site') }}">
+                            <a href="{{ backpack_url('site') }}">
                                 <i class="fa fa-building"></i>
                                 <span>Siti</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/companyManager/sitetype') }}">
+                            <a href="{{ backpack_url('sitetype') }}">
                                 <i class="fa fa-files-o"></i>
                                 <span>Tipi di Siti</span>
                             </a>
@@ -104,44 +96,50 @@
                     <span>Sensori</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
+                @if(auth()->user()->isCustomer())
+                    <li>
+                        <a href="{{  url('/customer/guest') }}">
+                            <i class="fa fa-user"></i> 
+                            <span>Utenti Guest</span>
+                        </a>
+                    </li>
+                @endif
                 <ul class="treeview-menu">
                     @if(auth()->user()->isAdmin())
                         <li>
-                            <a href="{{ url('/admin/sensorcatalog') }}">
+                            <a href="{{ backpack_url('sensorcatalog') }}">
                                 <i class="fa fa-files-o"></i>
                                 <span>Cataloghi</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/sensortype') }}">
+                            <a href="{{ backpack_url('sensortype') }}">
                                 <i class="fa fa-thermometer-3"></i>
                                 <span>Tipi di Sensori</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/brand') }}">
+                            <a href="{{ backpack_url('brand') }}">
                                 <i class="fa fa-feed"></i>
                                 <span>Brand sensori</span>
                             </a>
                         </li>
-                    @endif
-                    @if(auth()->user()->isCompanyManager())
                         <li>
-                            <a href="{{ url('/companyManager/sensor') }}">
+                            <a href="{{ backpack_url('sensor') }}">
                                 <i class="fa fa-podcast"></i>
                                 <span>Sensori</span>
                             </a>
                         </li>
                     @endif
-                    @if(auth()->user()->isEmployee() || auth()->user()->isGuest())
+                    @if(auth()->user()->isCustomer() || auth()->user()->isGuest())
                         <li>
-                            <a href="{{ url('/employee/message') }}">
+                            <a href="{{ url('/customer/message') }}">
                                 <i class="fa fa-envelope-o"></i>
                                 <span>Messaggi</span>
                             </a>
                         </li>
                     <li>
-                        <a href="{{ url('/employee/detection') }}">
+                        <a href="{{ url('/customer/detection') }}">
                             <i class="fa fa-hdd-o"></i>
                             <span>Dati</span>
                         </a>

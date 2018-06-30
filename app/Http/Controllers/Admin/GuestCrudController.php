@@ -22,7 +22,7 @@ class GuestCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Guest');
-        $this->crud->setRoute('/companyManager/guest');
+        $this->crud->setRoute('/customer/guest');
         $this->crud->setEntityNameStrings('Guest', 'Guest');
 
         /*
@@ -101,7 +101,7 @@ class GuestCrudController extends CrudController
 
         switch ($saveAction) {
             case 'save_and_new':
-                $redirectUrl = url('/companyManager/employee/create');
+                $redirectUrl = url('/admin/customer/create');
                 break;
             case 'save_and_edit':
             case 'save_and_back':

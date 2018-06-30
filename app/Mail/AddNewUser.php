@@ -49,7 +49,7 @@ class AddNewUser extends Mailable
     public function build()
     {
         return $this->from('sensortoolsrl@gmail.com',"SensorTool srl")
-            ->markdown('email.addNewCompanyManager')
+            ->markdown('email.addNewUser')
             ->with([
                 'url' => $this->url,
                 'enterprise' => $this->enterprise->businessName,

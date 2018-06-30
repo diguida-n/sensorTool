@@ -24,7 +24,7 @@ class EnterpriseTenantScope implements Scope
             return;
         }
         $enterprise_id = $user->enterprise_id;
-        if($user->isCompanyManager())
+        if($user->isCustomer() || $user->isGuest())
             $builder->where('id',$enterprise_id);
     }
 }

@@ -19,7 +19,7 @@ class SiteCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Site');
-        $this->crud->setRoute('/companyManager/site');
+        $this->crud->setRoute('/admin/site');
         $this->crud->setEntityNameStrings('Sito', 'Siti');
 
         /*
@@ -28,14 +28,26 @@ class SiteCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+
+
+        $this->crud->addField([
+            'label' => "Azienda",
+            'type' => 'select2',
+            'name' => 'enterprise_id', // the db column for the foreign key
+            'entity' => 'enterprise', // the method that defines the relationship in your Model
+            'attribute' => 'businessName', // foreign key attribute that is shown to user
+            'model' => "App\Models\Enterprise", // foreign key model
+            "attributes"=>['required'=>true]
+        ], 'create');
 
         $this->crud->addField([
             'name' => 'name',
             'label' => 'Nome sito',
         ], 'update/create/both');
+
 
         $this->crud->addField([
             'name' => 'address',
@@ -71,9 +83,17 @@ class SiteCrudController extends CrudController
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
-        $this->crud->removeField('enterprise_id', 'both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
         // ------ CRUD COLUMNS
+
+        if(auth()->user()->isAdmin()){
+             $this->crud->addColumn([
+                'name' => 'enterpriseName', // The db column name
+                'label' => "Azienda", // Table column heading
+                'type' => 'model_function',
+                'function_name' => 'getEnterpriseName'
+            ]);
+        }
         $this->crud->addColumn([
            'name' => 'name',
            'label' => "Nome"
@@ -101,6 +121,14 @@ class SiteCrudController extends CrudController
             'function_name' => 'getImage'
 
         ]);
+        $this->crud->addColumn([
+            'name' => 'map', // The db column name
+            'label' => "Mappa", // Table column heading
+            'type' => 'model_function',
+            'function_name' => 'getImage'
+
+        ]);
+
 
         $this->crud->removeColumns(['enterprise_id']); // remove an array of columns from the stack
         $this->crud->addButtonFromModelFunction("line",'addNewSensor','getAddNewSensor','end');
@@ -111,7 +139,7 @@ class SiteCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        $request['enterprise_id']=auth()->user()->enterprise_id;
+        //$request['enterprise_id']=auth()->user()->enterprise_id;
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -121,7 +149,7 @@ class SiteCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        $request['enterprise_id']=auth()->user()->enterprise_id;
+        //$request['enterprise_id']=auth()->user()->enterprise_id;
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry

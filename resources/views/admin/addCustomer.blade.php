@@ -24,7 +24,7 @@
 
             @include('crud::inc.grouped_errors')
 
-              {!! Form::open(array('url' => route('admin.enterprise.storeCompanyManager',$enterpriseId), 'method' => 'post')) !!}
+              {!! Form::open(array('url' => route('admin.enterprise.storeCustomer',$enterpriseId), 'method' => 'post')) !!}
               <div class="box">
 
                 <div class="box-header with-border">

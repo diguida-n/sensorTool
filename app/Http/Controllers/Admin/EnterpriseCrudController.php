@@ -71,7 +71,7 @@ class EnterpriseCrudController extends CrudController
         ]);
 
         // ------ CRUD BUTTONS
-        $this->crud->addButtonFromModelFunction("line",'addNewCompanyManager','getAddNewCompanyManager','end');
+        $this->crud->addButtonFromModelFunction("line",'addNewCustomer','getAddNewCustomer','end');
         $this->crud->enableExportButtons();
     }
 
@@ -93,7 +93,7 @@ class EnterpriseCrudController extends CrudController
         return $redirect_location;
     }
 
-    public function addCompanyManager($enterpriseId)
+    public function addCustomer($enterpriseId)
     {
         $data['crud'] = $this->crud;
         $data['saveAction'] = $this->getSaveAction();
@@ -108,14 +108,14 @@ class EnterpriseCrudController extends CrudController
         $data['title'] = 'Aggiungi Responsabile Aziendale'.' '.$this->crud->entity_name;
         $data['enterpriseId'] = $enterpriseId;
         // dd($this->crud->getFields('create'));
-        return view('admin.addCompanyManager',$data);
+        return view('admin.addCustomer',$data);
     }
 
-    public function storeCompanyManager(Request $request,$enterprise)
+    public function storeCustomer(Request $request,$enterprise)
     {
         $this->validate($request,['email'=> 'required|email']);
         $enterprise = Enterprise::find($enterprise)->first();
-        Mail::to($request->email)->send(new AddNewUser($enterprise,'Company Manager',$request->email));
+        Mail::to($request->email)->send(new AddNewUser($enterprise,'Customer',$request->email));
         
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
         return $this->getRedirectRoute($enterprise);
@@ -128,7 +128,7 @@ class EnterpriseCrudController extends CrudController
 
         switch ($saveAction) {
             case 'save_and_new':
-                $redirectUrl = route('admin.enterprise.addCompanyManager',$itemId);
+                $redirectUrl = route('admin.enterprise.addCustomer',$itemId);
                 break;
             case 'save_and_edit':
                 $redirectUrl = $this->crud->route.'/'.$itemId.'/edit';

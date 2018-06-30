@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Site;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -19,7 +20,7 @@ class SensorCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Sensor');
-        $this->crud->setRoute('/companyManager/sensor');
+        $this->crud->setRoute('/admin/sensor');
         $this->crud->setEntityNameStrings('Sensore', 'Sensori');
 
         /*
@@ -117,7 +118,7 @@ class SensorCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        $request['enterprise_id']=auth()->user()->enterprise_id;
+        $request['enterprise_id']=Site::find($request->site_id)->enterprise_id;
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -127,7 +128,7 @@ class SensorCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        $request['enterprise_id']=auth()->user()->enterprise_id;
+        $request['enterprise_id']=Site::find($request->site_id)->enterprise_id;
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry

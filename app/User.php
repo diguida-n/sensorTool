@@ -49,12 +49,12 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
-
-
+    
     public function enterprise()
     {
         return $this->belongsTo(Enterprise::class);
     }
+
     public function site()
     {
         return $this->belongsTo(Site::class);
@@ -64,14 +64,12 @@ class User extends Authenticatable
     {
         return $this->HasRole("Guest")?true:false;
     }
-    public function isEmployee()
+
+    public function isCustomer()
     {
-        return $this->HasRole("Employee")?true:false;
+        return $this->HasRole("Customer")?true:false;
     }
-    public function isCompanyManager()
-    {
-        return $this->HasRole("Company Manager")?true:false;
-    }
+    
     public function isAdmin()
     {
         return $this->HasRole("Admin")?true:false;

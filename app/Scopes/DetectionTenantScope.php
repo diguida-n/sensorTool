@@ -24,7 +24,7 @@ class DetectionTenantScope implements Scope
             return;
         }
         $enterprise_id = $user->enterprise_id;
-        if($user->isCompanyManager())
+        if($user->isCustomer() || $user->isGuest())
             $builder->where('enterprise_id',$enterprise_id)->orWhere('enterprise_id',null);
     }
 }

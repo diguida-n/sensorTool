@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\EmployeeRequest as StoreRequest;
-use App\Http\Requests\EmployeeRequest as UpdateRequest;
+use App\Http\Requests\CustomerRequest as StoreRequest;
+use App\Http\Requests\CustomerRequest as UpdateRequest;
 use App\Mail\AddNewUser;
 use App\Models\Enterprise;
 use App\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Mail;
 
-class EmployeeCrudController extends CrudController
+class CustomerCrudController extends CrudController
 {
     public function setup()
     {
@@ -20,9 +20,9 @@ class EmployeeCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Employee');
-        $this->crud->setRoute('/companyManager/employee');
-        $this->crud->setEntityNameStrings('impiegato', 'impiegati');
+        $this->crud->setModel('App\Models\Customer');
+        $this->crud->setRoute('/admin/customer');
+        $this->crud->setEntityNameStrings('cliente', 'clienti');
 
         /*
         |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class EmployeeCrudController extends CrudController
         // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'email',
-            'label' => 'Email Impiegato',
+            'label' => 'Email Cliente',
             'type' => 'email'
         ], 'create');
         
@@ -59,13 +59,13 @@ class EmployeeCrudController extends CrudController
         $this->crud->removeButton('update');
         
 
-        $employeeIds = [];
-        $users = User::where('enterprise_id',auth()->user()->enterprise_id)->get();
+        $customerIds = [];
+        $users = User::all();
         foreach ($users as $u) {
-            if($u->hasRole('Employee'))
-                $employeeIds[]=$u->id;
+            if($u->hasRole('Customer'))
+                $customerIds[]=$u->id;
         }
-        $this->crud->addClause('whereIn','id',$employeeIds);
+        $this->crud->addClause('whereIn','id',$customerIds);
 
         $this->crud->enableExportButtons();
     }
@@ -74,7 +74,7 @@ class EmployeeCrudController extends CrudController
     {
         // your additional operations before save here
         $enterprise = Enterprise::find(auth()->user()->enterprise_id)->first();
-        Mail::to($request->email)->send(new AddNewUser($enterprise,'Employee',$request->email));
+        Mail::to($request->email)->send(new AddNewUser($enterprise,'Customer',$request->email));
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
@@ -97,7 +97,7 @@ class EmployeeCrudController extends CrudController
 
         switch ($saveAction) {
             case 'save_and_new':
-                $redirectUrl = url('/companyManager/employee/create');
+                $redirectUrl = url('/admin/customer/create');
                 break;
             case 'save_and_edit':
             case 'save_and_back':

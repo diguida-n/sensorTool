@@ -110,7 +110,7 @@
             var id = {{auth()->user()->enterprise && !auth()->user()->isGuest()?auth()->user()->enterprise->id:0}};
             $.ajax({
                 method:"POST",
-                url:"/employee/getSensorsData/"+id,
+                url:"/customer/getSensorsData/"+id,
                 async:true,
                 success:function(data){
                     for (var siteKey in data) {

@@ -33,14 +33,15 @@ class Enterprise extends Model
     public function getAddress()
     {
         $address = json_decode($this->address);
+
         if($address)
             return $address->name.", "."".$address->administrative.", ".$address->city.", ".$address->country;
         return "";
     }
 
-    public function getAddNewCompanyManager()
+    public function getAddNewCustomer()
     {
-        return '<a href="'.route('admin.enterprise.addCompanyManager',$this->id).'" class="btn btn-xs btn-default"><i aria-hidden="true" class="fa fa-user"></i> + Company Manager</a>';
+        return '<a href="'.route('admin.enterprise.addCustomer',$this->id).'" class="btn btn-xs btn-default"><i aria-hidden="true" class="fa fa-user"></i> + Cliente</a>';
     }
     /*
     |--------------------------------------------------------------------------

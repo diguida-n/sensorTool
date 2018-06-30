@@ -48,7 +48,7 @@ class Site extends Model
 
     public function getAddNewSensor()
     {
-        return '<a href="'.url('companyManager/sensor/create').'" class="btn btn-xs btn-default"><i aria-hidden="true" class="fa fa-assistive-listening-systems"></i> + Sensore</a>';
+        return '<a href="'.url('admin/sensor/create').'" class="btn btn-xs btn-default"><i aria-hidden="true" class="fa fa-assistive-listening-systems"></i> + Sensore</a>';
     }
     /*
     |--------------------------------------------------------------------------

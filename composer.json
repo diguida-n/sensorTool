@@ -9,6 +9,7 @@
         "backpack/base": "^0.8.6",
         "backpack/crud": "^3.3",
         "backpack/permissionmanager": "^2.1",
+        "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
         "lab404/laravel-impersonate": "^1.2",

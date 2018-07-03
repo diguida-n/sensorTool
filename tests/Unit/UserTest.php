@@ -37,6 +37,7 @@ class UserTest extends TestCase
         $customer= User::create([
             'name' => "Customer",
             'email' => "customer@enterprise.com",
+            'enterprise_id'=> $this->enterprise->id,
             'password' => bcrypt("customer")
         ]);
         $customer->assignRole('Customer');

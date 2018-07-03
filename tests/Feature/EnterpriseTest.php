@@ -30,14 +30,10 @@ class EnterpriseTest extends TestCase
     public function test_login_as_admin()
     {	
     	
-        // $response = $this->call('POST','/admin/login', ['email'=>'admin@sensortool.com', 'password' =>'admin','_token'=> csrf_token()]);
          $this->visit('/admin/login')
              ->type('admin@sensortool.com', 'email')
              ->type('admin', 'password')
              ->press('Accedi')
-             ->seePageIs('/admin/dashboard');
-         // $this->assertResponseStatus(302, $response->status());
-	
-    	// $response->assertStatus(302); 
+             ->seePageIs('/');
     }
 }

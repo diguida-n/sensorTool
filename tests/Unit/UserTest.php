@@ -26,12 +26,20 @@ class UserTest extends TestCase
             'email' => "admin@sensortool.com",
             'password' => bcrypt("admin"),
         ]);
+        $u->assignRole('Admin');
 
         $this->enterprise = Enterprise::create([
             'businessName' => "Enterprise",
             'address' => '{"name":"Via Giuseppe Re David","administrative":"Puglia","county":"Bari","city":"Bari","suburb":"Municipio 2","country":"Italia","countryCode":"it","type":"address","latlng":{"lat":41.1132,"lng":16.8762},"postcode":"70100","value":"Via Giuseppe Re David, Bari, Puglia, Italia"}',
             'vatNumber' => '12345678910',
         ]);
+
+        $customer= User::create([
+            'name' => "Customer",
+            'email' => "customer@enterprise.com",
+            'password' => bcrypt("customer")
+        ]);
+        $customer->assignRole('Customer');
 
     }
 
@@ -66,7 +74,14 @@ class UserTest extends TestCase
             ->type('customer','password_confirmation')
             ->press('Registrati')
             ->seePageIs('/customer/dashboard');
+    }
 
-        ;
+     public function test_login_as_customer()
+    {   
+        $this->visit('/admin/login')
+             ->type('customer@enterprise.com', 'email')
+             ->type('customer', 'password')
+             ->press('Accedi')
+             ->seePageIs('/customer/dashboard');
     }
 }

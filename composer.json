@@ -14,7 +14,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "lab404/laravel-impersonate": "^1.2",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.5"
     },
     "require-dev": {
         "backpack/generators": "^1.1",

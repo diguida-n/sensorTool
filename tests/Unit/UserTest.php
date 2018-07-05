@@ -18,36 +18,16 @@ class UserTest extends TestCase
 {
 	use DatabaseMigrations;
 
-    private $enterprise;
     private $site;
+
 	protected function setUp()
     {
     	parent::setUp();
 
-    	$u = User::create([
-            'name' => "Admin",
-            'email' => "admin@sensortool.com",
-            'password' => bcrypt("admin"),
-        ]);
-        $u->assignRole('Admin');
-
-        $this->enterprise = Enterprise::create([
-            'businessName' => "Enterprise",
-            'address' => '{"name":"Via Giuseppe Re David","administrative":"Puglia","county":"Bari","city":"Bari","suburb":"Municipio 2","country":"Italia","countryCode":"it","type":"address","latlng":{"lat":41.1132,"lng":16.8762},"postcode":"70100","value":"Via Giuseppe Re David, Bari, Puglia, Italia"}',
-            'vatNumber' => '12345678910',
-        ]);
-
-        $customer= User::create([
-            'name' => "Customer",
-            'email' => "customer@enterprise.com",
-            'enterprise_id'=> $this->enterprise->id,
-            'password' => bcrypt("customer")
-        ]);
-        $customer->assignRole('Customer');
-
         $siteType = SiteType::create([
             "name"=> "tipo sito 1"
         ]);
+        
         $this->site = Site::create([
             'name' => 'sito 1',
             'address' => '{
@@ -77,7 +57,6 @@ class UserTest extends TestCase
         ]);
 
         $guest->assignRole('Guest');
-
     }
 
     public function test_access_to_site()

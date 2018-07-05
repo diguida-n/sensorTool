@@ -90,20 +90,20 @@
                     </ul>
                 </li>
             @endif
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-podcast"></i>
-                    <span>Sensori</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                @if(auth()->user()->isCustomer())
+             @if(auth()->user()->isCustomer())
                     <li>
                         <a href="{{  url('/customer/guest') }}">
                             <i class="fa fa-user"></i> 
                             <span>Utenti Guest</span>
                         </a>
                     </li>
-                @endif
+            @endif
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-podcast"></i>
+                    <span>Sensori</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
                 <ul class="treeview-menu">
                     @if(auth()->user()->isAdmin())
                         <li>

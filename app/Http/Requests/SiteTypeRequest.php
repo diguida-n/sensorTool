@@ -25,7 +25,7 @@ class SiteTypeRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|max:255'
         ];
     }
 
@@ -37,7 +37,7 @@ class SiteTypeRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            //
+            'name'=> 'Nome'
         ];
     }
 

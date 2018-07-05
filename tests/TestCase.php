@@ -6,11 +6,14 @@ use App\Exceptions\Handler;
 use App\Models\Enterprise;
 use App\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use DatabaseMigrations;
+    
     public $baseUrl = 'http://localhost';
 
     protected $admin;

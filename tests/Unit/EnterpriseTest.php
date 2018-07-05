@@ -13,33 +13,17 @@ class EnterpriseTest extends TestCase
 {
 
 	use DatabaseMigrations;
-	private $admin;
 	public function setUp($value='')
 	{
 		parent::setUp();
-		$this->admin = User::create([
-            'name' => "Admin",
-            'email' => "admin@sensortool.com",
-            'password' => bcrypt("admin"),
-        ]);
-        $this->admin->assignRole('Admin');
-
-        
 	}
 
 
 	public function test_only_admin_access_admin_panel()
 	{
-		$customer = User::create([
-            'name' => "customer",
-            'email' => "customer@sensortool.com",
-            'enterprise_id'=> 1,
-            'password' => bcrypt("customer"),
-        ]);
-		$customer->assignRole('Customer');
-		$this->actingAs($customer);
+		$this->actingAs($this->customer);
 		$this->visit('/')
-            ->click($customer->name)
+            ->click($this->customer->name)
             ->click('Area riservata')
             ->dontSee('Imprese');
 

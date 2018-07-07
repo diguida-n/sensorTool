@@ -30,6 +30,16 @@ class EnterpriseTest extends TestCase
         $this->visit('/admin/enterprise')
             ->seePageIs('/');
 
+        $this->actingAs($this->guest);
+
+        $this->visit('/')
+            ->click($this->guest->name)
+            ->click('Area riservata')
+            ->dontSee('Imprese');
+
+        $this->visit('/admin/enterprise')
+            ->seePageIs('/');
+
 	}
 	public function test_go_to_admin_panel ()
 	{
@@ -50,20 +60,25 @@ class EnterpriseTest extends TestCase
             ->see('Aggiungi Impresa');
 	}
 
-	public function test_add_new_enterprise ()
+	public function test_go_to_add_new_enterprise ()
 	{
 		$this->actingAs($this->admin);
 		$this->visit('/admin/enterprise')
             ->click('Aggiungi Impresa')
             ->seePageIs('/admin/enterprise/create');
 	}
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
+
+
+	public function test_add_new_enterprise()
+	{
+		$this->actingAs($this->admin);
+		$this->visit('/admin/enterprise/create')
+			 ->type('IoT inc.', 'businessName')
+			 ->type('{"name":"Via Edoardo Orabona","administrative":"Puglia","county":"Bari","city":"Bari","suburb":"Municipio 2","country":"Italia","countryCode":"it","type":"address","latlng":{"lat":41.1077,"lng":16.8798},"postcode":"70100","value":"Via Edoardo Orabona, Bari, Puglia, Italia"}', 'address')
+			 ->type('12345678910', 'vatNumber')
+			 ->press('Salva e torna indietro')
+			 ->seePageIs('/admin/enterprise')
+			 ->assertResponseOk();
+
+	}
 }

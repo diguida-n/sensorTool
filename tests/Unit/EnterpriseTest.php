@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class EnterpriseTest extends TestCase
@@ -79,6 +80,38 @@ class EnterpriseTest extends TestCase
 			 ->press('Salva e torna indietro')
 			 ->seePageIs('/admin/enterprise')
 			 ->assertResponseOk();
+
+	}
+
+	public function test_edit_enterprise()
+	{
+		$this->actingAs($this->admin);
+		$this->visit('/admin/enterprise/'.$this->enterprise->id.'/edit')
+		->see($this->enterprise->businessName)
+		->see($this->enterprise->vatNumber)
+		->press('Salva e torna indietro')
+		->seePageIs('/admin/enterprise')
+		->assertResponseOk();
+
+
+	}
+
+	public function test_validation_of_enterprise_fields()
+	{	
+
+		try {
+			$this->actingAs($this->admin);
+			$this->visit('/admin/enterprise/'.$this->enterprise->id.'/edit')
+			 ->type('', 'businessName')
+				->type('{"name":"Via Edoardo Orabona","administrative":"Puglia","county":"Bari","city":"Bari","suburb":"Municipio 2","country":"Italia","countryCode":"it","type":"address","latlng":{"lat":41.1077,"lng":16.8798},"postcode":"70100","value":"Via Edoardo Orabona, Bari, Puglia, Italia"}', 'address')
+				->type('12345678910', 'vatNumber')
+				->press('Salva e torna indietro')
+			 	->seePageIs('/admin/enterprise/create');
+		} catch (ValidationException $e) {
+			
+		}
+			$this->see($this->enterprise->businessName)
+			->assertResponseOk();
 
 	}
 }

@@ -13,10 +13,6 @@ use Tests\DuskTestCase;
 class UserTest extends DuskTestCase
 {
     
-     public static function prepare()
-    {
-        parent::prepare();
-    }
 
     /*@test
 

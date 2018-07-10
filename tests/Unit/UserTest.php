@@ -2,16 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Enterprise;
-use App\Models\Site;
-use App\Models\SiteType;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -29,45 +22,47 @@ class UserTest extends TestCase
         $this->visit('/')
             ->see('Benvenuti sulla nostra Piattaforma!')
             ->dontSee('Accedi');
-    }
-   
+    }   
+
     public function test_login_as_admin()
-    {	
-    	$this->visit('/admin/login')
-             ->type('admin@sensortool.com', 'email')
-             ->type('admin', 'password')
-             ->press('Accedi')
-             ->seePageIs('/');
-    }
-
-    public function test_register_as_customer()
     {
-        $cryptedData = [];
-
-        $cryptedData['role'] = 'Customer';
-        $cryptedData['enterprise_id'] = $this->enterprise->id;
-        $cryptedData['expiring_date'] = Carbon::now('Europe/Rome')->addDay()->toDateTimeString();
-        $cryptedData['email'] = 'customer@sensorTool.com';
-        $cryptedData = Crypt::encryptString(json_encode($cryptedData));
-        $this->visit('/admin/register/'.$cryptedData)
-            ->type('customer','name')
-            ->type('customer','password')
-            ->type('customer','password_confirmation')
-            ->press('Registrati')
-            ->seePageIs('/customer/dashboard');
+        $response = $this->post('admin/login', [
+            'email' => $this->admin->email,
+            'password' => 'admin'
+        ]);
+        $this->seeIsAuthenticatedAs($this->admin);
     }
 
     public function test_login_as_customer()
-    {   
-        $this->visit('/admin/login')
-             ->type('customer@enterprise.com', 'email')
-             ->type('customer', 'password')
-             ->press('Accedi')
-             ->seePageIs('/customer/dashboard');
+    {
+        $response = $this->post('admin/login', [
+            'email' => $this->customer->email,
+            'password' => 'customer'
+        ]);
+        $this->seeIsAuthenticatedAs($this->customer);
     }
 
-    public function test_register_as_guest()
+     public function test_login_as_guest()
+    {   
+
+        $response = $this->post('admin/login', [
+            'email' => $this->guest->email,
+            'password' => 'guest'
+        ]);
+        $this->seeIsAuthenticatedAs($this->guest);
+    }
+
+    public function test_logout_an_authenticated_user()
     {
+        $user = $this->admin;
+        $response = $this->actingAs($user)->post('/logout');
+        $this->dontSeeIsAuthenticated();
+    }
+   
+
+    public function test_register_as_customer()
+    {
+
         $cryptedData = [];
 
         $cryptedData['role'] = 'Guest';
@@ -75,20 +70,18 @@ class UserTest extends TestCase
         $cryptedData['expiring_date'] = Carbon::now('Europe/Rome')->addDay()->toDateTimeString();
         $cryptedData['email'] = 'guest@sensorTool.com';
         $cryptedData = Crypt::encryptString(json_encode($cryptedData));
-        $this->visit('/admin/register/'.$cryptedData)
-            ->type('customer','name')
-            ->type('customer','password')
-            ->type('customer','password_confirmation')
-            ->press('Registrati')
-            ->seePageIs('/customer/dashboard');
-    }
 
-    public function test_login_as_guest()
-    {   
-        $this->visit('/admin/login')
-             ->type('guest@enterprise.com', 'email')
-             ->type('guest', 'password')
-             ->press('Accedi')
-             ->seePageIs('/customer/dashboard');
+        $response = $this->post('/admin/register', [
+            'name' => 'customer',
+            'email' => 'customer@sensorTool.com',
+            'password' => 'customer',
+            'password_confirmation' => 'customer',
+            'enterprise_id' => $this->enterprise->id,
+            'role' => 'Customer',
+            'expiring_date' => Carbon::now('Europe/Rome')->addDay()->toDateTimeString(),
+            'cryptedData'  => $cryptedData
+        ]);
+        $this->seeIsAuthenticated();
     }
+   
 }

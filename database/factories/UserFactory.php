@@ -32,7 +32,7 @@ $factory->define(App\Models\Enterprise::class, function (Faker $faker) {
     return [
         'businessName' 	=> $faker->name,
         'address' 		=> $faker->address,
-        'vatNumber' 	=> $faker->vat,
+        'vatNumber' 	=> '12345678910',
     ];
 });
 
@@ -40,7 +40,7 @@ $factory->define(App\Models\Site::class, function (Faker $faker) {
     return [
         'name' 			=> $faker->name,
         'address' 		=> $faker->address,
-        'map' 			=> $faker->vat,
+        'map' 			=> '',
         'description' 	=> $faker->text,
         'enterprise_id' => function (){
         	return factory('App\Models\Enterprise')->create()->id;
@@ -53,6 +53,6 @@ $factory->define(App\Models\Site::class, function (Faker $faker) {
 
 $factory->define(App\Models\SiteType::class, function (Faker $faker) {
     return [
-        'name' 			=> $faker->name,
+        'name' 			=> $faker->name
     ];
 });

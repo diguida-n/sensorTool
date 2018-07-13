@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Exceptions\Handler;
 use App\Models\Enterprise;
+use App\Models\SensorType;
 use App\Models\Site;
 use App\Models\SiteType;
 use App\User;
@@ -23,6 +24,8 @@ abstract class TestCase extends BaseTestCase
     protected $guest;
     protected $customer;
     protected $enterprise;
+    protected $sensorType;
+    protected $siteType;
 
     protected function setUp()
     {
@@ -51,6 +54,8 @@ abstract class TestCase extends BaseTestCase
         ]);
         $this->customer->assignRole('Customer');
 
+        $this->siteType=SiteType::create(["name"=> "tipo sito 1"]);
+
         $this->site = Site::create([
             'name' => 'sito 1',
             'address' => '{
@@ -69,7 +74,7 @@ abstract class TestCase extends BaseTestCase
             'map' => null,
             'description' => "description",
             'enterprise_id'=> $this->enterprise->id,
-            'site_type_id' => SiteType::create(["name"=> "tipo sito 1"])->id
+            'site_type_id' => $this->siteType->id
         ]);
 
         $this->guest = User::create([
@@ -79,6 +84,8 @@ abstract class TestCase extends BaseTestCase
             'password' => bcrypt("guest")
         ]);
         $this->guest->assignRole('Guest');
+
+        $this->sensorType = SensorType::create(['name' => 'termometro semplice', 'description' => '']);
     }
 
     protected function signIn($user = null)	

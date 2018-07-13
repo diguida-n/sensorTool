@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Exceptions\Handler;
+use App\Models\Brand;
 use App\Models\Enterprise;
 use App\Models\SensorType;
 use App\Models\Site;
@@ -26,6 +27,7 @@ abstract class TestCase extends BaseTestCase
     protected $enterprise;
     protected $sensorType;
     protected $siteType;
+    protected $brand;
 
     protected function setUp()
     {
@@ -86,6 +88,8 @@ abstract class TestCase extends BaseTestCase
         $this->guest->assignRole('Guest');
 
         $this->sensorType = SensorType::create(['name' => 'termometro semplice', 'description' => '']);
+
+        $this->brand = Brand::create(['name' => 'Sony']);
     }
 
     protected function signIn($user = null)	

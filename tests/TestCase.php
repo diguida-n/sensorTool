@@ -5,6 +5,7 @@ namespace Tests;
 use App\Exceptions\Handler;
 use App\Models\Brand;
 use App\Models\Enterprise;
+use App\Models\SensorCatalog;
 use App\Models\SensorType;
 use App\Models\Site;
 use App\Models\SiteType;
@@ -28,6 +29,7 @@ abstract class TestCase extends BaseTestCase
     protected $sensorType;
     protected $siteType;
     protected $brand;
+    protected $sensorCatalog;
 
     protected function setUp()
     {
@@ -90,6 +92,15 @@ abstract class TestCase extends BaseTestCase
         $this->sensorType = SensorType::create(['name' => 'termometro semplice', 'description' => '']);
 
         $this->brand = Brand::create(['name' => 'Sony']);
+
+        $this->sensorCatalog = SensorCatalog::create([
+            'name' => 'sensore in catalogo',
+            'description' => 'descrizione' ,
+            'min_detectable' => 1,
+            'max_detectable' => 10,
+            'brand_id' => $this->brand->id,
+            'sensor_type_id' => $this->sensorType->id,
+        ]);
     }
 
     protected function signIn($user = null)	

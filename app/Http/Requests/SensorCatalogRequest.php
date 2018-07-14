@@ -25,7 +25,9 @@ class SensorCatalogRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|max:255',
+            'brand_id' => 'required',
+            'sensor_type_id' => 'required',
         ];
     }
 
@@ -37,7 +39,9 @@ class SensorCatalogRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            //
+            'name' => 'Nome',
+            'brand_id' => 'Brand sensore',
+            'sensor_type_id' => 'Tipo sensore',
         ];
     }
 

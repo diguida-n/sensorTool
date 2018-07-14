@@ -58,7 +58,7 @@ class SensorCatalogCrudController extends CrudController
         ], 'update/create/both');
         $this->crud->addField([
             'label' => "Tipo Sensore",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'sensor_type_id', // the db column for the foreign key
             'entity' => 'sensorType', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
@@ -67,7 +67,7 @@ class SensorCatalogCrudController extends CrudController
         ], 'update/create/both');
         $this->crud->addField([
             'label' => "Brand sensore",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'brand_id', // the db column for the foreign key
             'entity' => 'brand', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user

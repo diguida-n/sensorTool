@@ -35,7 +35,7 @@ class SiteCrudController extends CrudController
 
         $this->crud->addField([
             'label' => "Azienda",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'enterprise_id', // the db column for the foreign key
             'entity' => 'enterprise', // the method that defines the relationship in your Model
             'attribute' => 'businessName', // foreign key attribute that is shown to user
@@ -73,7 +73,7 @@ class SiteCrudController extends CrudController
 
         $this->crud->addField([
             'label' => "Tipo Sito",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'site_type_id', // the db column for the foreign key
             'entity' => 'siteType', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user

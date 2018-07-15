@@ -50,17 +50,17 @@ class SensorCrudController extends CrudController
             'name' => 'latitude',
             'label' => 'Latitudine',
             'type' => 'number',
-            'attributes' => ["step" => 0.0000001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
+            'attributes' => ["step" => 0.001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
         ], 'update/create/both');
         $this->crud->addField([
             'name' => 'longitude',
             'label' => 'Longitudine',
             'type' => 'number',
-            'attributes' => ["step" => 0.0000001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
+            'attributes' => ["step" => 0.001,"max"=>9999.9999999,"min"=>-9999.9999999], // allow decimals
         ], 'update/create/both');
         $this->crud->addField([
             'label' => "Sito",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'site_id', // the db column for the foreign key
             'entity' => 'siteType', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
@@ -69,7 +69,7 @@ class SensorCrudController extends CrudController
         ], 'update/create/both');
         $this->crud->addField([
             'label' => "Catalogo Sensori",
-            'type' => 'select2',
+            'type' => 'select',
             'name' => 'sensor_catalog_id', // the db column for the foreign key
             'entity' => 'sensorCatalog', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user

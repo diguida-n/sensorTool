@@ -50,4 +50,56 @@ class SiteTest extends TestCase
         	->press('Salva e torna indietro')
 			->seePageIs('/admin/site');
     }
+
+    public function test_admin_can_access_site_type()
+    {
+    	$this->actingAs($this->admin);
+
+        $this->visit('/admin/sitetype')
+			->seePageIs('/admin/sitetype');
+    }
+
+    public function test_customer_cant_access_site_type()
+    {
+    	$this->actingAs($this->customer);
+
+        $this->visit('/admin/sitetype')
+			->seePageIs('/');
+    }
+
+    public function test_admin_can_add_site_type()
+    {
+    	$this->actingAs($this->admin);
+
+        $this->visit('/admin/sitetype/create')
+        	->type('tipo di sito di prova','name')
+        	->press('Salva e torna indietro')
+			->seePageIs('/admin/sitetype');
+    }
+
+    public function test_admin_can_edit_site_type()
+    {
+    	$this->actingAs($this->admin);
+
+        $this->visit('/admin/sitetype/'.$this->siteType->id.'/edit')
+        	->see($this->siteType->name)
+        	->press('Salva e torna indietro')
+			->seePageIs('/admin/sitetype');
+    }
+
+
+    public function test_admin_can_add_sensor_to_site()
+    {
+    	$this->actingAs($this->admin);
+
+        $this->visit('/admin/sensor/create')
+        ->type('0','min_attended')
+        	->type('80','max_attended')
+        	->type('41.9102415','latitude')
+        	->type('12.3959123','longitude')
+        	->select($this->site->id,'site_id')
+        	->select($this->sensorCatalog->id,'sensor_catalog_id')
+        	->press('Salva e torna indietro')
+			->seePageIs('/admin/sensor');
+    }
 }

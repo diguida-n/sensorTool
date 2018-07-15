@@ -40,6 +40,21 @@ class CatalogTest extends TestCase
 			->seePageIs('/admin/sensorcatalog');
     }
 
+    public function test_admin_can_edit_sensor_catalog()
+    {
+        $this->actingAs($this->admin);
+
+        $this->visit('/admin/sensorcatalog/'.$this->sensorCatalog->id.'/edit')
+            ->see($this->sensorCatalog->name)
+            ->see($this->sensorCatalog->description)
+            ->see($this->sensorCatalog->min_detectable)
+            ->see($this->sensorCatalog->max_detectable)
+            ->see($this->sensorCatalog->sensor_type_id)
+            ->see($this->sensorCatalog->brand_id)
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/sensorcatalog');
+    }
+
 
     public function test_name_of_sensor_catalog_is_required()
     {

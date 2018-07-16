@@ -26,16 +26,32 @@ class SiteTest extends TestCase
 
     public function test_admin_can_add_site()
     {
-    	$this->actingAs($this->admin);
+        $this->actingAs($this->admin);
 
         $this->visit('/admin/site/create')
-        	->select($this->enterprise->id, 'enterprise_id')
-        	->type('Sensore di prova','name')
-        	->type('descrizione del sensore di prova','description')
-        	->attach('/img/contact-section.jpg', 'map')
-        	->select($this->siteType->id, 'site_type_id')
-        	->press('Salva e torna indietro')
-			->seePageIs('/admin/site');
+            ->select($this->enterprise->id, 'enterprise_id')
+            ->type('Sensore di prova','name')
+            ->type('descrizione del sensore di prova','description')
+            ->attach('/img/contact-section.jpg', 'map')
+            ->select($this->siteType->id, 'site_type_id')
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/site');
+    }
+
+    public function test_admin_cant_add_site_missing_name()
+    {
+        $this->withExceptionHandling();
+        $this->actingAs($this->admin);
+
+        $this->visit('/admin/site/create')
+            ->select($this->enterprise->id, 'enterprise_id')
+            // ->type('Sensore di prova','name')
+            ->type('descrizione del sensore di prova','description')
+            ->attach('/img/contact-section.jpg', 'map')
+            ->select($this->siteType->id, 'site_type_id')
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/site/create')
+            ->see('Il campo nome è richiesto.');
     }
 
     public function test_admin_can_edit_site()
@@ -107,7 +123,6 @@ class SiteTest extends TestCase
     {
         $this->withExceptionHandling();
 
-
         $this->actingAs($this->admin);
 
         $this->visit('/admin/sensor/create')
@@ -119,7 +134,7 @@ class SiteTest extends TestCase
             ->select($this->sensorCatalog->id,'sensor_catalog_id')
             ->press('Salva e torna indietro')
             ->seePageIs('/admin/sensor/create')
-             ->see('Id Sito selezionato non è valido');
+            ->see('Id Sito selezionato non è valido');
     }
 
     public function test_admin_cant_add_sensor_to_site_not_selected_sensor()

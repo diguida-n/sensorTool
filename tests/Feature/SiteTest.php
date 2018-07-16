@@ -90,16 +90,52 @@ class SiteTest extends TestCase
 
     public function test_admin_can_add_sensor_to_site()
     {
-    	$this->actingAs($this->admin);
+        $this->actingAs($this->admin);
 
         $this->visit('/admin/sensor/create')
         ->type('0','min_attended')
-        	->type('80','max_attended')
-        	->type('41.9102415','latitude')
-        	->type('12.3959123','longitude')
-        	->select($this->site->id,'site_id')
-        	->select($this->sensorCatalog->id,'sensor_catalog_id')
-        	->press('Salva e torna indietro')
-			->seePageIs('/admin/sensor');
+            ->type('80','max_attended')
+            ->type('41.9102415','latitude')
+            ->type('12.3959123','longitude')
+            ->select($this->site->id,'site_id')
+            ->select($this->sensorCatalog->id,'sensor_catalog_id')
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/sensor');
+    }
+
+    public function test_admin_cant_add_sensor_to_site_not_selected_site()
+    {
+        $this->withExceptionHandling();
+
+
+        $this->actingAs($this->admin);
+
+        $this->visit('/admin/sensor/create')
+        ->type('0','min_attended')
+            ->type('80','max_attended')
+            ->type('41.9102415','latitude')
+            ->type('12.3959123','longitude')
+            // ->select(null,'site_id')
+            ->select($this->sensorCatalog->id,'sensor_catalog_id')
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/sensor/create')
+             ->see('Id Sito selezionato non è valido');
+    }
+
+    public function test_admin_cant_add_sensor_to_site_not_selected_sensor()
+    {
+        $this->withExceptionHandling();
+
+        $this->actingAs($this->admin);
+
+        $this->visit('/admin/sensor/create')
+        ->type('0','min_attended')
+            ->type('80','max_attended')
+            ->type('41.9102415','latitude')
+            ->type('12.3959123','longitude')
+            ->select($this->site->id,'site_id')
+            ->press('Salva e torna indietro')
+            ->seePageIs('/admin/sensor/create')
+            ->see('Id Sensore selezionato non è valido');
     }
 }

@@ -26,6 +26,8 @@ class SensorRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'sensor_catalog_id' => 'exists:sensor_catalogs,id',
+            'site_id' => 'exists:sites,id'
         ];
     }
 
@@ -37,7 +39,8 @@ class SensorRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            //
+            'sensor_catalog_id'=>'Id Sensore',
+            'site_id'=>'Id Sito',
         ];
     }
 
